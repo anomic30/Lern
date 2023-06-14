@@ -20,7 +20,7 @@ app.use(morgan('dev'));
 
 // Define routes below
 app.get("/", (req, res) => {
-    res.send("<h1>👋🏻 Hello from Learnn server!</h1>");
+    res.send("<h1>👋🏻 Hello from the Lern server!</h1>");
 });
 
 // app.use("/api", routes);
