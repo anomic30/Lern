@@ -13,6 +13,10 @@ const ChapterSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  quizId:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Quiz',
+  }
 });
 
 const CourseSchema = new mongoose.Schema({
@@ -21,7 +25,6 @@ const CourseSchema = new mongoose.Schema({
     required: true,
   },
   chapters: [ChapterSchema],
-  // Other course fields as needed
 });
 
 const Course = mongoose.model('Course', CourseSchema);
