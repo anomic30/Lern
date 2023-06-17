@@ -20,7 +20,8 @@
     "express-rate-limit": "^6.7.0",
     "helmet": "^7.0.0",
     "mongoose": "^7.2.4",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "@magic-sdk/admin": "^1.8.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

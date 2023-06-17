@@ -1,14 +1,17 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-  name: {
+  magic_id: {
     type: String,
-    required: true,
+    default: "",
   },
   email: {
     type: String,
     required: true,
-    unique: true,
+  },
+  userName: {
+    type: String,
+    required: true,
   },
 
   courses: [
@@ -28,6 +31,9 @@ const UserSchema = new mongoose.Schema({
       finishedAt: {
         type: Date,
       },
+      timeTaken:{
+        type: Number,
+      }
     },
   ],
 
