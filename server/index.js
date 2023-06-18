@@ -5,7 +5,7 @@ const helmet = require("helmet");
 const compression = require("compression");
 require("dotenv").config();
 const { connectToDatabase } = require("./db");
-// const routes = require("./routes");
+const routes = require("./routes/index");
 
 const app = express();
 const port = process.env.PORT || 8082;
@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
     res.send("<h1>👋🏻 Hello from the Lern server!</h1>");
 });
 
-// app.use("/api", routes);
+app.use("/api", routes);
 
 connectToDatabase().then(() => {
     app.listen(port, () => {

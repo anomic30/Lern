@@ -33,6 +33,7 @@ const UserSchema = new mongoose.Schema({
       },
       timeTaken:{
         type: Number,
+        default: 0,
       }
     },
   ],

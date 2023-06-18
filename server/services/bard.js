@@ -15,7 +15,7 @@ async function textBard(prompt) {
             console.log("Calling Bard");
             const result = await bardClient.generateText({
                 model: TEXT_MODEL_NAME,
-                temperature: 0.2,
+                temperature: 0.8,
                 candidateCount: 1,
                 maxOutputTokens: 1024,
                 prompt: {
@@ -34,10 +34,10 @@ async function textBard(prompt) {
     });
 }
 
-textBard("Hello world").then((result) => {
-    console.log("Output: ",result);
-}).catch((error) => {
-    console.log(error);
-});
+// textBard("Hello world").then((result) => {
+//     console.log("Output: ",result);
+// }).catch((error) => {
+//     console.log(error);
+// });
 
 module.exports = { textBard };
