@@ -29,7 +29,7 @@ router.get("/data", authMiddleware, async (req, res) => {
     }
 })
 
-//Route to generate Syllabus
+//Route to generate Course
 router.post("/generateCourse", authMiddleware, async (req, res) => {
     const magicId = req.magicId;
     const topic = req.body.topic;
@@ -43,22 +43,30 @@ router.post("/generateCourse", authMiddleware, async (req, res) => {
                 "User does not exist"
             );
         }
-        let syllabus = await generateCourse(topic);
-        console.log(syllabus);
+        let course = await generateCourse(topic);
+        console.log(course.syllabus);
 
         let chapters = [];
-        for(let chapter of syllabus){
+        for(let chapter of course.syllabus){
             let chapterDetails = await generateChapter(chapter);
+            let quizDetails = await generateQuiz(chapter);
+            //save the quiz in the Quiz model
+            const newQuiz = new Quiz({
+                title: quizDetails.title,
+                questions: quizDetails.questions
+            })
+            await newQuiz.save();
+            //save the quiz id in the chapter object
             let chapterObj = {
                 title: chapterDetails.title,
                 content: chapterDetails.content,
-                quizId: ""
+                quizId: newQuiz._id
             }
             chapters.push(chapterObj);
         }
         //save the syllabus in the Course model
         const newCourse = new Course({
-            title: topic,
+            title: course.title,
             chapters: chapters
         })
 
@@ -67,14 +75,124 @@ router.post("/generateCourse", authMiddleware, async (req, res) => {
         //save the course id in the user model. userData.cousese is an array
         userData.courses.push({
             courseId: newCourse._id,
+            title: course.title,
             startedAt: new Date().toISOString()
         });
+
         await userData.save();
 
         return res.status(200).json({
             newCourse
         });
     }catch(error){
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
+//Route to get a particular course
+router.get("/course/:courseId", authMiddleware, async (req, res) => {
+    const courseId = req.params.courseId;
+
+    try{
+        const course = await Course.findById(courseId);
+        if(!course){
+            return res.status(200).send(
+                "Course does not exist"
+            );
+        }
+        return res.status(200).json({
+            course
+        });
+    }catch(error){
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
+//Route to get a particular quiz
+router.get("/quiz/:quizId", authMiddleware, async (req, res) => {
+    const quizId = req.params.quizId;
+
+    try{
+        const quiz = await Quiz.findById(quizId);
+        if(!quiz){
+            return res.status(200).send(
+                "Quiz does not exist"
+            );
+        }
+        return res.status(200).json({
+            quiz
+        });
+    }catch(error){
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
+//Route to update the user's score of a particular quiz
+router.post("/quiz/:quizId", authMiddleware, async (req, res) => {
+    const quizId = req.params.quizId;
+    const score = req.body.score;
+    const magicId = req.magicId;
+
+    try {
+        const userData = await User.findOne({
+            magic_id: magicId
+        });
+        if (!userData) {
+            return res.status(200).send(
+                "User does not exist"
+            );
+        }
+        //Find thge quizId in the userData quizzes array and update the score
+        for(let quiz of userData.quizzes){
+            if(quiz.quizId == quizId){
+                quiz.score = score;
+                break;
+            }
+        }
+        await userData.save();
+        return res.status(200).json({
+            userData
+        });
+    } catch (error) {
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
+//Route to mark a user's course as completed
+router.post("/course/:courseId", authMiddleware, async (req, res) => {
+    const courseId = req.params.courseId;
+    const magicId = req.magicId;
+
+    try {
+        const userData = await User.findOne({
+            magic_id: magicId
+        });
+        if (!userData) {
+            return res.status(200).send(
+                "User does not exist"
+            );
+        }
+        //Find thge courseId in the userData courses array and update the completedAt
+        for(let course of userData.courses){
+            if(course.courseId == courseId){
+                course.completedAt = new Date().toISOString();
+                course.completed = true;
+                break;
+            }
+        }
+        await userData.save();
+        return res.status(200).json({
+            userData
+        });
+    } catch (error) {
         return res.status(500).json({
             error: error.message
         });
