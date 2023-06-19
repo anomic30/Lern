@@ -199,4 +199,82 @@ router.post("/course/:courseId", authMiddleware, async (req, res) => {
     }
 });
 
+//Route to get user analytics
+router.get("/analytics", authMiddleware, async (req, res) => {
+    const magicId = req.magicId;
+
+    try {
+        const userData = await User.findOne({
+            magic_id: magicId
+        });
+        if (!userData) {
+            return res.status(200).send(
+                "User does not exist"
+            );
+        }
+        let completedCourses = 0;
+        let completedQuizzes = 0;
+        let totalScore = 0;
+        let totalQuizzes = 0;
+        let totalTimeTaken = 0;
+        for(let course of userData.courses){
+            if(course.completed){
+                completedCourses++;
+            }
+            totalTimeTaken += course.timeTaken;
+        }
+        for(let quiz of userData.quizzes){
+            if(quiz.score != null){
+                completedQuizzes++;
+                totalScore += quiz.score;
+            }
+            totalQuizzes++;
+        }
+        let averageQuizScore = totalScore/totalQuizzes;
+
+        //To help visualize the user's progress and identify patterns in their quiz performance.
+        let quizScoreOverTheTime = [];
+        for(let quiz of userData.quizzes){
+            if(quiz.score != null){
+                let obj = {
+                    x: quiz.timeTaken,
+                    y: quiz.score
+                }
+                quizScoreOverTheTime.push(obj);
+            }
+        }
+
+        //To help visualize the user's progress and identify patterns in their course completion.
+        let completedCoursesOverTime = [];
+        let completedCoursesCount = 0;
+
+        userData.courses.sort((a, b) => a.finishedAt - b.finishedAt);
+
+        for (let course of userData.courses) {
+            if (course.finished) {
+                completedCoursesCount++;
+
+                let obj = {
+                    x: course.finishedAt,
+                    y: completedCoursesCount,
+                };
+
+                completedCoursesOverTime.push(obj);
+            }
+        }
+        
+        return res.status(200).json({
+            completedCourses,
+            completedQuizzes,
+            averageQuizScore,
+            quizScoreOverTheTime,
+            completedCoursesOverTime
+        });
+    }catch(error){
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
 module.exports = router;
