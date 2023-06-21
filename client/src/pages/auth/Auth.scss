@@ -1,0 +1,20 @@
+.auth-con{
+  display:flex;
+  gap:100px;
+  height: 100vh;
+  
+  
+  
+  .left-con{
+    background-color: pink;
+    flex:0.5;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: center;
+  }
+  .right-con{
+    background-color: rgb(192, 246, 255);
+   
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './Auth.scss'
+import { Button } from "@nextui-org/react";
 import Axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
@@ -66,12 +67,23 @@ const Login = () => {
     }
 
     return (
-        <div>
-            <h1>This id the Login page</h1>
-            <input type="text" placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
-            <button onClick={handleLogin}>Login</button>
-            { loading && <h1>Loading...</h1> }
-        </div>
+        <section>
+            <div className='auth-con'>
+                <div className='left-con'>
+                    <div className='auth-header'>
+                        <h1>Log in to your account</h1>
+                        <p>Continue with Google or enter your details </p>
+                    </div>
+                    <Button size="lg">
+                        Google
+                    </Button>
+                </div>
+                <div className='right-con'>
+                    hello
+                </div>
+
+            </div>
+        </section>
     )
 }
 
