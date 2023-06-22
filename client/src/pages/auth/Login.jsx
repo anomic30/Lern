@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
 import useAuthStore from '../../store/useAuthStore';
 import useUserStore from '../../store/useUserStore';
-import magic from '../../utils/magic';
+import magic from '../../services/magic';
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 

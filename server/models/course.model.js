@@ -16,6 +16,7 @@ const ChapterSchema = new mongoose.Schema({
   quizId:{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Quiz',
+    default: null
   }
 });
 
