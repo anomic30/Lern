@@ -1,5 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 * {
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+  font-size: 18px;
 }
+
+@font-face {
+  font-family: "ProductSans Regular";
+  src: url("./assets/fonts/ProductSans-Regular.ttf");
+}
+
+@layer base {
+  html {
+    font-family:ProductSans Regular;
+  }
+}
+
+
+

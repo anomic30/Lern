@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@material-tailwind/react": "^2.0.4",
     "@nextui-org/react": "^1.0.0-beta.13",
     "axios": "^1.4.0",
     "framer-motion": "^10.12.16",
@@ -24,7 +25,10 @@
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
     "sass": "^1.58.2",
+    "tailwindcss": "^3.3.2",
     "vite": "^4.3.9"
   }
 }
