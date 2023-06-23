@@ -1,11 +1,20 @@
 import React, { useState } from 'react'
 import './Auth.scss'
-import { Button } from "@nextui-org/react";
+import {
+    Card,
+    Input,
+    Checkbox,
+    Button,
+    Typography,
+} from "@material-tailwind/react";
 import Axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
 import useAuthStore from '../../store/useAuthStore';
 import useUserStore from '../../store/useUserStore';
+
+import googleIcon from "../../assets/icons/google.svg";
+import loginimg from "../../assets/images/loginimage.png";
 import magic from '../../services/magic';
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
@@ -68,18 +77,52 @@ const Login = () => {
 
     return (
         <section>
-            <div className='auth-con'>
+            <div className='auth-con '>
                 <div className='left-con'>
-                    <div className='auth-header'>
+                    {/* <div className='auth-header'>
                         <h1>Log in to your account</h1>
                         <p>Continue with Google or enter your details </p>
                     </div>
-                    <Button size="lg">
-                        Google
-                    </Button>
+                    <Button>Button</Button> */}
+                    <Card color="transparent" shadow={false} >
+                        <Typography variant="h4" color="blue-gray" >
+                            <h4>Log in</h4>
+                        </Typography>
+                        <Typography color="gray" className="mt-1 ">
+                            Log in to your account
+                        </Typography>
+                        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+                            <div className="mb-4 flex flex-col gap-6">
+                                <Button
+                                    size="sm"
+                                    variant="outlined"
+                                    color="blue-gray"
+                                    className="flex items-center justify-center gap-3 "
+                                >
+                                    <img src={googleIcon} alt="logo"  />
+                                    Continue with Google
+                                </Button>
+                                <p class="or">or</p>
+                                <Input size="lg" label="Email" />
+                            </div>
+                            <Button className="mt-6 " fullWidth>
+                                Log in
+                            </Button>
+                            <Typography color="gray" className="mt-4 text-center font-normal">
+                                New to Lern?{" "}
+                                <a
+                                    href="#"
+                                    className="font-medium text-blue-500 transition-colors hover:text-blue-700"
+                                    onClick={()=>navigate("/register")}
+                                >
+                                    Sign up
+                                </a>
+                            </Typography>
+                        </form>
+                    </Card>
                 </div>
                 <div className='right-con'>
-                    hello
+                    <img src={loginimg} alt="image" />
                 </div>
 
             </div>
