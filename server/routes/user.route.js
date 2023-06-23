@@ -5,7 +5,7 @@ const User = require('../models/user.model');
 const Course = require('../models/course.model');
 const Quiz = require('../models/quiz.model');
 const authMiddleware = require('../middlewares/authMiddleware');
-const {generateCourse, generateChapter} = require('../services/generator');
+const {generateCourse, generateChapter, generateQuiz} = require('../services/generator');
 
 //Route for sending user data
 router.get("/data", authMiddleware, async (req, res) => {
@@ -43,24 +43,22 @@ router.post("/generateCourse", authMiddleware, async (req, res) => {
                 "User does not exist"
             );
         }
+        console.log("Course generator called")
         let course = await generateCourse(topic);
+        console.log("Course generator ended")
         console.log(course.syllabus);
 
         let chapters = [];
-        for(let chapter of course.syllabus){
+        for (let chapter of course.syllabus) {
+            console.log("Chapter generator called for: ", chapter);
             let chapterDetails = await generateChapter(chapter);
-            let quizDetails = await generateQuiz(chapter);
-            //save the quiz in the Quiz model
-            const newQuiz = new Quiz({
-                title: quizDetails.title,
-                questions: quizDetails.questions
-            })
-            await newQuiz.save();
+            console.log("Chapter generator ended")
+            console.log(chapterDetails);
+            
             //save the quiz id in the chapter object
             let chapterObj = {
-                title: chapterDetails.title,
-                content: chapterDetails.content,
-                quizId: newQuiz._id
+                title: chapter,
+                content: chapterDetails,
             }
             chapters.push(chapterObj);
         }
@@ -85,6 +83,50 @@ router.post("/generateCourse", authMiddleware, async (req, res) => {
             newCourse
         });
     }catch(error){
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
+//Route to generate a quiz
+router.post("/generateQuiz", authMiddleware, async (req, res) => {
+    const topic = req.body.topic;
+    const courseId = req.body.courseId;
+
+    try {
+        console.log("Quiz generator called for: ", topic);
+        let quizDetails = await generateQuiz(topic);
+        console.log("Quiz generator ended");
+
+        console.log(quizDetails);
+        //save the quiz in the Quiz model
+        const newQuiz = new Quiz({
+            title: quizDetails.title,
+            questions: quizDetails.questions
+        })
+        await newQuiz.save();
+
+        //Find the chapter with title = topic inside the course with courseId and update quizId
+        const course = await Course.findById(courseId);
+        if (!course) {
+            return res.status(200).send(
+                "Course does not exist"
+            );
+        }
+        for (let chapter of course.chapters) {
+            if (chapter.title === topic) {
+                chapter.quizId = newQuiz._id;
+                break;
+            }
+        }
+        await course.save();
+        console.log("Quiz saved!");
+        
+        return res.status(200).json({
+            newQuiz
+        });
+    } catch (error) {
         return res.status(500).json({
             error: error.message
         });
