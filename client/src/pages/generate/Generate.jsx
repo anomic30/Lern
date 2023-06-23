@@ -27,13 +27,30 @@ const Generate = () => {
         }
     }
 
+    const generateQuiz = async () => {
+        let courseId = "64948e9dd086785f1c2b915e";
+        let topic = "Introduction to Quantum Physics";
+
+        try {
+            const quizResp = await Axios.post(APP_SERVER + "/api/user/generateQuiz", { courseId, topic }, {
+                headers: {
+                    Authorization: "Bearer " + Cookies.get('token')
+                }
+            });
+            console.log(quizResp);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     if(!auth) return <h1>Loading...</h1>
     return (
         <div>
             <h1>What do you want to learn?</h1>
             <input type="text" placeholder='Topic' onChange={(e) => setTopicName(e.target.value)} />
             {/* <ReactMarkdown>{content}</ReactMarkdown> */}
-            
+            <button onClick={handleTopicGeneration}>Generate</button>
+            <button onClick={generateQuiz}>Generate Quiz</button>
         </div>
     )
 }

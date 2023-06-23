@@ -35,7 +35,7 @@ async function generateChapter(chapter) {
             let chapterDetails = await textBard(prompt);
             resolve(chapterDetails.output);
         } catch (error) {
-            console.log("Error in generateChapter: ")
+            console.log("Error in generateChapter: ", error)
             reject(error);
         }
     });
@@ -49,7 +49,8 @@ async function generateQuiz(chapter) {
             let formattedResponse = await formatResponse(quiz);
             resolve(JSON.parse(formattedResponse));
         } catch (error) {
-            console.log("Error in generateQuiz: ")
+            //if error, generate a quiz again with a different prompt
+            generateQuiz(chapter);
             reject(error);
         }
     });
