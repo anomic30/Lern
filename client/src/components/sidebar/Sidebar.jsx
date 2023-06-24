@@ -3,11 +3,35 @@ import './Sidebar.scss'
 import { NavLink, useNavigate } from "react-router-dom"
 import { motion } from 'framer-motion'
 import { sidebarRoutes } from './sidebarRoutes';
-import magic from '../../services/magic'; 
+import magic from '../../services/magic';
 import Cookies from 'js-cookie'
+import app_logo from '../../assets/icons/logo.svg'
+import {
+    Card,
+    Typography,
+    List,
+    ListItem,
+    ListItemPrefix,
+    ListItemSuffix,
+    Chip,
+    Alert,
+} from "@material-tailwind/react";
+import {
+    PresentationChartBarIcon,
+    CubeTransparentIcon,
+    ShoppingBagIcon,
+    UserCircleIcon,
+    Cog6ToothIcon,
+    InboxIcon,
+    PowerIcon,
+    ArrowLeftOnRectangleIcon,
+    RectangleGroupIcon
+} from "@heroicons/react/24/solid";
+import useAuthStore from '../../store/useAuthStore';
 
 const Sidebar = () => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const logout = useAuthStore(state => state.logout);
 
     const handleHover = () => {
         setIsExpanded(true);
@@ -24,41 +48,37 @@ const Sidebar = () => {
     const handleLogout = () => {
         magic.user.logout().then(() => {
             Cookies.remove("token");
-            navigate("/");
+            logout();
+            navigate("/", { replace: true });
         });
     }
 
     return (
-        <motion.div
-            initial={{ width: 75 }}
-            animate={{ width: isExpanded ? 200 : 75}}
-            transition={{ duration: 0.3 }}
-            onMouseEnter={handleHover}
-            onMouseLeave={handleMouseLeave}
-            className="Sidebar">
-            
-            <div className='logo'>
-                {/* <img src={codz_logo} alt="Codz" onClick={()=>navigate("/")} /> */}
-                {isExpanded && <p className="logo-name">Lern</p>}
+        <Card className="box-border h-[calc(100vh-2rem)] w-full max-w-[15rem] p-2 shadow-xl shadow-blue-gray-900/5">
+            <div className="mb-2 pl-4">
+                <img src={app_logo} alt="Lern" className='app-logo' />
             </div>
-
-            <div className="routes-con">
-                <div className="routes">
-                    {sidebarRoutes.map((route) => {
-                        return <NavLink to={route.path} key={route.name}>
-                                <motion.div className='route-box'>
-                                    {/* <img src={route.icon} alt={route.name} className="route-icon" /> */}
-                                    {isExpanded && <p className="route-name">{route.name}</p>}
-                                </motion.div>
-                        </NavLink>
-                    })}
-                </div>
-                <div className="route-box" onClick={handleLogout}>
-                    {/* <img src={logout_icon} alt="Logout" /> */}
-                    {isExpanded && <p className="route-name">Logout</p>}
-                </div>
-            </div>
-        </motion.div>
+            <List>
+                {sidebarRoutes.map((route, index) => {
+                    return <NavLink to={route.path} key={route.name}>
+                        <ListItem>
+                            <ListItemPrefix>
+                                <route.icon className="h-5 w-5" />
+                            </ListItemPrefix>
+                            {route.name}
+                        </ListItem>
+                    </NavLink>
+                })}
+            </List>
+            <List className='fixed bottom-4'>
+                <ListItem className='top-auto' onClick={handleLogout}>
+                    <ListItemPrefix>
+                        <ArrowLeftOnRectangleIcon className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Logout
+                </ListItem>
+            </List>
+        </Card>
     )
 }
 

@@ -22,20 +22,30 @@ const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 const Login = () => {
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
+    const [inputError, setInputError] = useState(false);
     const setAuth = useAuthStore(state => state.setAuth);
     const setUser = useUserStore(state => state.setUser);
     const navigate = useNavigate();
+
+    const handleInput = (e) => {
+        setEmail(e.target.value);
+        if (e.target.value) {
+            setInputError(false);
+        }
+    }
 
     const handleLogin = async () => {
         setLoading(true);
         if (!email) {
             alert("Please provide your email!");
+            setInputError(true);
             setLoading(false);
             return;
         } else {
             //check valid email
             if (!email.includes("@")) {
                 alert("Please enter a valid email address!");
+                setInputError(true);
                 setLoading(false);
                 return;
             }
@@ -61,7 +71,7 @@ const Login = () => {
                     setAuth(loginResp.data.metadata);
                     Cookies.set('token', didToken);
                     setLoading(false);
-                    navigate("/");
+                    navigate("/app");
                 } catch (err) {
                     alert("Login attempt failed. Please try again later!");
                     setLoading(false);
@@ -79,14 +89,9 @@ const Login = () => {
         <section>
             <div className='auth-con '>
                 <div className='left-con'>
-                    {/* <div className='auth-header'>
-                        <h1>Log in to your account</h1>
-                        <p>Continue with Google or enter your details </p>
-                    </div>
-                    <Button>Button</Button> */}
                     <Card color="transparent" shadow={false} >
                         <Typography variant="h4" color="blue-gray" >
-                            <h4>Log in</h4>
+                            Log in
                         </Typography>
                         <Typography color="gray" className="mt-1 ">
                             Log in to your account
@@ -103,9 +108,9 @@ const Login = () => {
                                     Continue with Google
                                 </Button>
                                 <p class="or">or</p>
-                                <Input size="lg" label="Email" />
+                                <Input size="lg" label="Email" onChange={(e) => handleInput(e)} error={inputError} />
                             </div>
-                            <Button className="mt-6 " fullWidth>
+                            <Button className="mt-6 " fullWidth onClick={handleLogin}>
                                 Log in
                             </Button>
                             <Typography color="gray" className="mt-4 text-center font-normal">
@@ -124,7 +129,6 @@ const Login = () => {
                 <div className='right-con'>
                     <img src={loginimg} alt="image" />
                 </div>
-
             </div>
         </section>
     )

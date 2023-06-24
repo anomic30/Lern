@@ -12,6 +12,7 @@ module.exports = withMT({
       fontFamily: {
         'sans': ['ProductSans Regular', ...defaultTheme.fontFamily.sans],
       },
+
     },
   },
   plugins: [],

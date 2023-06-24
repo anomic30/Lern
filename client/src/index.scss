@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 * {
   padding: 0px;
   margin: 0px;
@@ -21,5 +20,10 @@
   }
 }
 
+button {
+  text-transform: none !important;
+}
 
-
+.app-logo{
+  height: 2em;
+}
