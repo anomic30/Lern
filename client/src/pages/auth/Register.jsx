@@ -18,10 +18,30 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [userName, setUserName] = useState('');
     const [loading, setLoading] = useState(false);
+    const [inputNameError, setNameError] = useState(false);
+    const [inputEmailError, setEmailError] = useState(false);
     const navigate = useNavigate();
 
+    const handleInput = (e, func) => {
+        func(e.target.value);
+        if (e.target.value) {
+            setEmailError(false);
+            setNameError(false);
+        }
+    }
+
     const handleRegistration = async () => {
-        if (!email || !userName) return
+        if (!email) {
+            alert("Please provide your email!");
+            setEmailError(true);
+            return;
+        }
+        if (!userName) {
+            alert("Please provide your name!");
+            setNameError(true);
+            return;
+        }
+
         console.log(email, userName);
 
         setLoading(true);
@@ -70,11 +90,11 @@ const Register = () => {
                                     <img src={googleIcon} alt="logo" />
                                     Continue with Google
                                 </Button>
-                                <p class="or">or</p>
-                                <Input size="lg" label="Name" />
-                                <Input size="lg" label="Email" />
+                                <p className="or">or</p>
+                                <Input size="lg" label="Name" onChange={(e)=>handleInput(e, setUserName)} error={inputNameError}/>
+                                <Input size="lg" label="Email" onChange={(e)=>handleInput(e, setEmail)} error={inputEmailError}/>
                             </div>
-                            <Button className="mt-6 " fullWidth>
+                            <Button className="mt-6" fullWidth onClick={handleRegistration}>
                                 Sign up
                             </Button>
                             <Typography color="gray" className="mt-4 text-center font-normal">

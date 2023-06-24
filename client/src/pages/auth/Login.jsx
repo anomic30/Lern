@@ -107,7 +107,7 @@ const Login = () => {
                                     <img src={googleIcon} alt="logo"  />
                                     Continue with Google
                                 </Button>
-                                <p class="or">or</p>
+                                <p className="or">or</p>
                                 <Input size="lg" label="Email" onChange={(e) => handleInput(e)} error={inputError} />
                             </div>
                             <Button className="mt-6 " fullWidth onClick={handleLogin}>

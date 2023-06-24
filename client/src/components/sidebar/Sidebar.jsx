@@ -32,6 +32,7 @@ import useAuthStore from '../../store/useAuthStore';
 const Sidebar = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const logout = useAuthStore(state => state.logout);
+    const navigate = useNavigate();
 
     const handleHover = () => {
         setIsExpanded(true);
@@ -54,11 +55,11 @@ const Sidebar = () => {
     }
 
     return (
-        <Card className="box-border h-[calc(100vh-2rem)] w-full max-w-[15rem] p-2 shadow-xl shadow-blue-gray-900/5">
-            <div className="mb-2 pl-4">
+        <Card className="mr-4 box-border h-[calc(100vh-2rem)] max-w-[18rem] p-2 shadow-xl shadow-blue-gray-900/5">
+            <div className="mb-2 pl-4" onClick={()=>navigate("/")}>
                 <img src={app_logo} alt="Lern" className='app-logo' />
             </div>
-            <List>
+            <List className='w-full'>
                 {sidebarRoutes.map((route, index) => {
                     return <NavLink to={route.path} key={route.name}>
                         <ListItem>
@@ -70,7 +71,7 @@ const Sidebar = () => {
                     </NavLink>
                 })}
             </List>
-            <List className='fixed bottom-4'>
+            <List className='absolute bottom-4 left-2'>
                 <ListItem className='top-auto' onClick={handleLogout}>
                     <ListItemPrefix>
                         <ArrowLeftOnRectangleIcon className="h-5 w-5" />
