@@ -13,7 +13,7 @@ const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 const Course = () => {
     const navigate = useNavigate();
     const { courseId } = useParams();
-    const [courseResp, setCourseResp] = useState({});
+    // const [courseResp, setCourseResp] = useState({});
     const setCourse = useCourseStore(state => state.setCourse);
     const course = useCourseStore(state => state.course);
     const user = useUserStore(state => state.user);
@@ -29,9 +29,9 @@ const Course = () => {
                     Authorization: "Bearer " + Cookies.get('token')
                 }
             });
-            setCourseResp(courseResp.data.course);
+            // setCourseResp(courseResp.data.course);
             setCourse(courseResp.data.course);
-            console.log(courseResp);
+            console.log(courseResp.data.course);
         } catch (err) {
             console.log(err);
         }

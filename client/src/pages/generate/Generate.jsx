@@ -10,6 +10,7 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import generate_img from '../../assets/images/generate.png';
 import { suggestions } from './suggestions';
 import ChapterList from '../../components/chapterList/ChapterList';
+import useCourseStore from '../../store/useCourseStore';
 
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
@@ -20,8 +21,9 @@ const Generate = () => {
     const [topicName, setTopicName] = useState('');
     const [suggestedTopic, setSuggestedTopic] = useState('');
     const [isGenerating, setIsGenerating] = useState(false);
-    const [course, setCourse] = useState(null);
     const [showCourse, setShowCourse] = useState(false);
+    const setCourse = useCourseStore(state => state.setCourse);
+    const course = useCourseStore(state => state.course);
 
     const handleTopicGeneration = async () => {
         if (!topicName) {
@@ -39,7 +41,7 @@ const Generate = () => {
             setCourse(genResp.data.newCourse);
             setShowCourse(true);
             setIsGenerating(false);
-            console.log(genResp.data);
+            console.log(genResp.data.newCourse);
         } catch (error) {
             setIsGenerating(false);
             console.log(error);
