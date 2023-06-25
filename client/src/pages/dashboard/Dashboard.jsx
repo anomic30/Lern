@@ -13,7 +13,7 @@ const Dashboard = () => {
   if (!auth) return <h1>Loading...</h1>
 
   return (
-    <Card className="w-full ml-4 p-2">
+    <Card className="w-full p-2">
       <div className='dashboard-hero p-16'>
         <h1 className="text-6xl">Welcome</h1>
       </div>
