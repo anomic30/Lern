@@ -7,9 +7,9 @@ import {
     InboxIcon,
     PowerIcon,
     ArrowLeftOnRectangleIcon,
-    RectangleGroupIcon
-} from "@heroicons/react/24/solid";
-
+    RectangleGroupIcon,
+    BookOpenIcon,
+} from "@heroicons/react/24/outline";
 
 export const sidebarRoutes = [
     {
@@ -21,6 +21,11 @@ export const sidebarRoutes = [
         path: '/app/generate',
         name: 'Generate',
         icon: CubeTransparentIcon
+    },
+    {
+        path: '/app/courses',
+        name: 'Courses',
+        icon: BookOpenIcon
     },
 ]
 

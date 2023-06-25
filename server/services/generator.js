@@ -32,11 +32,13 @@ async function generateChapter(chapter) {
     let prompt = `Create fun and engaging reading content on the topic: ${chapter}. The content should be informative and enjoyable. Incorporate easy-to-understand relatable examples and use a conversational tone to engage the reader.`
     return new Promise(async (resolve, reject) => {
         try {
+            console.log("Generating chapter: ", chapter);
             let chapterDetails = await textBard(prompt);
             resolve(chapterDetails.output);
         } catch (error) {
             console.log("Error in generateChapter: ", error)
-            reject(error);
+            console.log("Generating chapter again!");
+            return generateChapter(chapter);
         }
     });
 }

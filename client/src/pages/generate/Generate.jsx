@@ -9,6 +9,7 @@ import { Button, Card, Input, Chip, List, ListItem, ListItemSuffix, IconButton, 
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import generate_img from '../../assets/images/generate.png';
 import { suggestions } from './suggestions';
+import ChapterList from '../../components/chapterList/ChapterList';
 
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
@@ -73,25 +74,7 @@ const Generate = () => {
                         <p className="text-md md:text-1xl lg:text-2xl mt-2">What do you want to lean today?</p>
                     }
                     {isGenerating? <div>Generating your curriculum...</div>:showCourse ?
-                        <div className='mt-20'>
-                            <h3 className='md:text-xl xl:text-2xl font-medium text-black'>{course?.title}</h3>
-                            <div className="mt-6"></div>
-
-                            <List>
-                                {course?.chapters.map((chapter, index) => {
-                                    return (
-                                        <ListItem ripple={false} className="py-1 pr-1 pl-4" key={index}>
-                                            {chapter.title}
-                                            <ListItemSuffix>
-                                                <IconButton variant="text" color="blue-gray">
-                                                    <ChevronRightIcon className="h-5 w-5" />
-                                                </IconButton>
-                                            </ListItemSuffix>
-                                        </ListItem>
-                                    )
-                                })}
-                            </List>
-                        </div>
+                        <ChapterList course={course} />
                         :
                         <div>
                             <div className="mt-32"></div>

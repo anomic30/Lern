@@ -36,7 +36,7 @@ const Sidebar = () => {
     const logout = useAuthStore(state => state.logout);
     const navigate = useNavigate();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const isMobile = useMediaQuery({ query: '(max-width: 640px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 896px)' });
 
     useEffect(() => {
         setIsSidebarOpen(!isMobile);
@@ -74,7 +74,7 @@ const Sidebar = () => {
             <Card className={`box-border h-[calc(100vh-2rem)] max-w-[18rem] p-2 shadow-xl shadow-blue-gray-900/5 ${isMobile ? 'h-full fixed inset-0 z-40 transform transition-all ease-in-out duration-300' : ''
                 } ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
             >
-                <div className="px-4 py-2 flex">
+                <div className="px-4 py-2 flex justify-between">
                     <img src={app_logo} alt="Lern" className='app-logo' onClick={() => navigate("/")} />
                     {isMobile && <button className="shadow-lg p-2"
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
