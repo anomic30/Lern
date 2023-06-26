@@ -9,30 +9,17 @@ import app_logo from '../../assets/icons/logo.svg'
 import { useMediaQuery } from 'react-responsive';
 import {
     Card,
-    Typography,
     List,
     ListItem,
     ListItemPrefix,
-    ListItemSuffix,
-    Chip,
-    Alert,
 } from "@material-tailwind/react";
 import {
-    PresentationChartBarIcon,
-    CubeTransparentIcon,
-    ShoppingBagIcon,
-    UserCircleIcon,
-    Cog6ToothIcon,
-    InboxIcon,
-    PowerIcon,
     ArrowLeftOnRectangleIcon,
-    RectangleGroupIcon,
     Bars3BottomLeftIcon,
 } from "@heroicons/react/24/solid";
 import useAuthStore from '../../store/useAuthStore';
 
 const Sidebar = () => {
-    // const [isExpanded, setIsExpanded] = useState(false);
     const logout = useAuthStore(state => state.logout);
     const navigate = useNavigate();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -41,18 +28,6 @@ const Sidebar = () => {
     useEffect(() => {
         setIsSidebarOpen(!isMobile);
     }, [isMobile]);
-
-    // const handleHover = () => {
-    //     setIsExpanded(true);
-    // };
-
-    // const handleMouseLeave = () => {
-    //     setIsExpanded(false);
-    // };
-
-    // const handleExpand = () => {
-    //     setIsExpanded(!isExpanded);
-    // }
 
     const handleLogout = () => {
         magic.user.logout().then(() => {

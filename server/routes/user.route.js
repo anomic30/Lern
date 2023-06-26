@@ -219,6 +219,7 @@ router.post("/quiz/:quizId", authMiddleware, async (req, res) => {
         for(let quiz of userData.quizzes){
             if(quiz.quizId == quizId){
                 quiz.score = score;
+                quiz.takenAt = new Date().toISOString();
                 break;
             }
         }

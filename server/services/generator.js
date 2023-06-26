@@ -45,7 +45,7 @@ async function generateChapter(chapter) {
 }
 
 async function generateQuiz(chapter) {
-    let prompt = `Create very short 4 MCQ quizzes having 4 options on the topic: ${chapter}. The format is JSON. Example: {title: "", questions: [{question:"", options: ["",""], answer: index}]}`
+    let prompt = `Create very short 4 MCQ quizzes having 4 options on the topic: ${chapter}. The answer will be zero based indexing. The format is JSON. Example: {title: "", questions: [{question:"", options: ["",""], answer: index}]}`
     return new Promise(async (resolve, reject) => {
         try {
             let quiz = await textBard(prompt);

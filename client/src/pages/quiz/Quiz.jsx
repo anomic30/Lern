@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import './Quiz.scss'
 
 import useUserStore from '../../store/useUserStore';
@@ -18,26 +18,34 @@ const Quiz = () => {
     const quiz = useQuizStore((state) => state.quiz);
     const setQuiz = useQuizStore((state) => state.setQuiz);
     const { quizId } = useParams();
-    
+
+    const APP_SERVER = import.meta.env.VITE_APP_SERVER;
+
     const fetchQuiz = async () => {
         if (quiz?._id === quizId) return;
-        try { 
+        try {
             const quizResp = await Axios.get(APP_SERVER + "/api/user/quiz/" + quizId, {
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
                 }
             });
             setQuiz(quizResp.data.quiz);
-        } catch (error) { 
+        } catch (error) {
             console.log(error);
         }
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         fetchQuiz();
     }, []);
 
-    const { title, questions } = quiz;
+    let title = "";
+    let questions = [];
+
+    if (quiz) {
+        title = quiz.title;
+        questions = quiz.questions;
+    }
     const currentQuestion = questions[currentQuestionIndex];
 
     const handleOptionChange = (optionIndex) => {
@@ -80,7 +88,7 @@ const Quiz = () => {
                     <p>{currentQuestion.question}</p>
                     {currentQuestion.options.map((option, index) => (
                         <div key={index} className="flex items-center gap-2">
-                            <Checkbox checked={selectedOptions[currentQuestionIndex] === index} onChange={() => handleOptionChange(index)} color='gray'/>
+                            <Checkbox checked={selectedOptions[currentQuestionIndex] === index} onChange={() => handleOptionChange(index)} color='gray' />
                             <span>{option}</span>
                         </div>
                     ))}
@@ -136,7 +144,7 @@ const Quiz = () => {
 
                     {!quizStarted ? (
                         <div className='h-3/6 w-full bg-emerald-100 self-center rounded-2xl flex flex-col content-center justify-center flex-wrap gap-2 md:gap-5'>
-                            <h1 className='text-xl md:text-3xl text-center'> Topic: {quiz.title}</h1>
+                            <h1 className='text-xl md:text-3xl text-center'> Topic: {quiz?.title}</h1>
                             <Button className='mx-auto bg-emerald-500' onClick={() => setQuizStarted(true)}>Start</Button>
                         </div>
                     ) : (
