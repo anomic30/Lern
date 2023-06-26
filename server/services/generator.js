@@ -36,9 +36,10 @@ async function generateChapter(chapter) {
             let chapterDetails = await textBard(prompt);
             resolve(chapterDetails.output);
         } catch (error) {
-            console.log("Error in generateChapter: ", error)
+            console.log("Error in generateChapter: ", error);
             console.log("Generating chapter again!");
-            return generateChapter(chapter);
+            let chapterDetails = await textBard(prompt);
+            resolve(chapterDetails.output);
         }
     });
 }

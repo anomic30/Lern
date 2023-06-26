@@ -71,16 +71,18 @@ router.post("/generateCourse", authMiddleware, async (req, res) => {
         await newCourse.save();
 
         //save the course id in the user model. userData.cousese is an array
-        userData.courses.push({
+        let courseMetadata = {
             courseId: newCourse._id,
             title: course.title,
             startedAt: new Date().toISOString()
-        });
+        }
+        userData.courses.push(courseMetadata);
 
         await userData.save();
 
         return res.status(200).json({
-            newCourse
+            newCourse,
+            courseMetadata
         });
     }catch(error){
         return res.status(500).json({
