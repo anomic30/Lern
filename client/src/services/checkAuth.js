@@ -6,6 +6,7 @@ const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
 export const checkAuth = async (setAuth, setUser, logout) => {
   const isLoggedIn = await magic.user.isLoggedIn();
+  console.log(isLoggedIn)
   if (isLoggedIn) {
     const authData = await magic.user.getInfo();
     const newToken = await magic.user.getIdToken({lifespan: 24 * 60 * 60});
@@ -25,6 +26,7 @@ export const checkAuth = async (setAuth, setUser, logout) => {
         console.log(error);
     }
   } else {
+    window.location.href = "/";
     logout();
   }
 };

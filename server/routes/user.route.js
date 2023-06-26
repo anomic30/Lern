@@ -71,16 +71,18 @@ router.post("/generateCourse", authMiddleware, async (req, res) => {
         await newCourse.save();
 
         //save the course id in the user model. userData.cousese is an array
-        userData.courses.push({
+        let courseMetadata = {
             courseId: newCourse._id,
             title: course.title,
             startedAt: new Date().toISOString()
-        });
+        }
+        userData.courses.push(courseMetadata);
 
         await userData.save();
 
         return res.status(200).json({
-            newCourse
+            newCourse,
+            courseMetadata
         });
     }catch(error){
         return res.status(500).json({
@@ -93,6 +95,8 @@ router.post("/generateCourse", authMiddleware, async (req, res) => {
 router.post("/generateQuiz", authMiddleware, async (req, res) => {
     const topic = req.body.topic;
     const courseId = req.body.courseId;
+    const chapterId = req.body.chapterId;
+    const magicId = req.magicId;
 
     try {
         console.log("Quiz generator called for: ", topic);
@@ -107,7 +111,7 @@ router.post("/generateQuiz", authMiddleware, async (req, res) => {
         })
         await newQuiz.save();
 
-        //Find the chapter with title = topic inside the course with courseId and update quizId
+        //Find the chapter with chapterId inside the course with courseId and update quizId
         const course = await Course.findById(courseId);
         if (!course) {
             return res.status(200).send(
@@ -115,12 +119,33 @@ router.post("/generateQuiz", authMiddleware, async (req, res) => {
             );
         }
         for (let chapter of course.chapters) {
-            if (chapter.title === topic) {
+            if (chapter._id == chapterId) {
                 chapter.quizId = newQuiz._id;
                 break;
             }
         }
+
         await course.save();
+
+        //Push the quiz id in the user model
+        const userData = await User.findOne({
+            magic_id: magicId
+        });
+        if (!userData) {
+            return res.status(200).send(
+                "User does not exist"
+            );
+        }
+        let quizMetadata = {
+            courseId: courseId,
+            quizId: newQuiz._id,
+            title: quizDetails.title,
+            takenAt: new Date().toISOString()
+        }
+        userData.quizzes.push(quizMetadata);
+
+        await userData.save();
+
         console.log("Quiz saved!");
         
         return res.status(200).json({
