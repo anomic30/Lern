@@ -74,7 +74,7 @@ const Register = () => {
                                 <Input size="lg" label="Name" />
                                 <Input size="lg" label="Email" />
                             </div>
-                            <Button className="mt-6 " fullWidth>
+                            <Button className="mt-6 bg-cblack" fullWidth>
                                 Sign up
                             </Button>
                             <Typography color="gray" className="mt-4 text-center font-normal">

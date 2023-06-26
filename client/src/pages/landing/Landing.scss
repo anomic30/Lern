@@ -1,0 +1,63 @@
+.Landing {
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .nav-con {
+    max-width: 85em;
+  }
+
+
+  .hero-con {
+    margin-top: 2em;
+    max-width: 85em;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 36px;
+    background-color: #F8F8F8;
+    display: flex;
+    align-items: center;
+
+    .hero-left {
+      flex: 0.6;
+      width: 100%;
+      font-size: 18px;
+      
+    }
+
+    .hero-right {
+      flex: 0.4;
+      width: 100%;
+    }
+  }
+
+  .feature-con{
+    max-width: 85em;
+    box-sizing: border-box;
+    width: 100%;
+
+    border-radius: 36px;
+
+    .feature-image{
+      width: 30%;
+  
+    }
+
+    .feature-1 div{
+      // flex: 0.6;
+    }
+  }
+
+  .foot{
+    max-width: 85rem;
+    background-color:#fafafa ;
+    border-radius: 20px;
+
+   
+  }
+}

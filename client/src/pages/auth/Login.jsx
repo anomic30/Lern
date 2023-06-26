@@ -110,7 +110,7 @@ const Login = () => {
                                 <p class="or">or</p>
                                 <Input size="lg" label="Email" onChange={(e) => handleInput(e)} error={inputError} />
                             </div>
-                            <Button className="mt-6 " fullWidth onClick={handleLogin}>
+                            <Button className="mt-6 bg-cblack" fullWidth onClick={handleLogin}>
                                 Log in
                             </Button>
                             <Typography color="gray" className="mt-4 text-center font-normal">

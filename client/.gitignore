@@ -19,9 +19,4 @@ dist-ssr
 .DS_Store
 *.suo
 *.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-.env
-package-lock.json
+*.njsprojss
