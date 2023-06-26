@@ -10,6 +10,7 @@ import Generate from '../pages/generate/Generate';
 import Courses from '../pages/courses/Courses';
 import Course from '../pages/course/Course';
 import Chapter from '../pages/chapter/Chapter';
+import Quiz from '../pages/quiz/Quiz';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -28,6 +29,7 @@ const AnimatedRoutes = () => {
                     <Route path="/app/course" element={<Course />} />
                     <Route path="/app/course/:courseId" element={<Course />} />
                     <Route path="/app/course/:courseId/chapter/:chapterId" element={<Chapter />} />
+                    <Route path="/app/quiz/:quizId" element={<Quiz />} />
                 </Route>
             </Routes>
         </AnimatePresence>

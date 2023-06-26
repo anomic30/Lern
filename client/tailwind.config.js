@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors')
 
 const withMT = require("@material-tailwind/react/utils/withMT");
 module.exports = withMT({
@@ -11,6 +12,9 @@ module.exports = withMT({
       },
       fontFamily: {
         'sans': ['ProductSans Regular', ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        ...colors,
       },
 
     },
