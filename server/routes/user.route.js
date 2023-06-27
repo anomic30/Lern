@@ -149,7 +149,8 @@ router.post("/generateQuiz", authMiddleware, async (req, res) => {
         console.log("Quiz saved!");
         
         return res.status(200).json({
-            newQuiz
+            newQuiz,
+            quizMetadata
         });
     } catch (error) {
         return res.status(500).json({

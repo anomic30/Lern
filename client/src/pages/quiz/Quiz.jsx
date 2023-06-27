@@ -35,7 +35,7 @@ const Quiz = () => {
         }
     }
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         fetchQuiz();
     }, []);
 
