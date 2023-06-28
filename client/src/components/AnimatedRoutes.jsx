@@ -11,6 +11,9 @@ import Courses from '../pages/courses/Courses';
 import Course from '../pages/course/Course';
 import Chapter from '../pages/chapter/Chapter';
 import Quiz from '../pages/quiz/Quiz';
+import Quizzes from '../pages/quizzes/Quizzes';
+import Insights from '../pages/insights/Insights';
+import Sidebar from './sidebar/Sidebar';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -30,6 +33,8 @@ const AnimatedRoutes = () => {
                     <Route path="/app/course/:courseId" element={<Course />} />
                     <Route path="/app/course/:courseId/chapter/:chapterId" element={<Chapter />} />
                     <Route path="/app/quiz/:quizId" element={<Quiz />} />
+                    <Route path="/app/quizzes/" element={<Quizzes />} />
+                    <Route path="/app/insights" element={<Insights />} />
                 </Route>
             </Routes>
         </AnimatePresence>

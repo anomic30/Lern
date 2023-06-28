@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Auth.scss'
 import {
     Card,
@@ -23,9 +23,14 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
     const [inputError, setInputError] = useState(false);
+    const auth = useAuthStore(state => state.auth);
     const setAuth = useAuthStore(state => state.setAuth);
     const setUser = useUserStore(state => state.setUser);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (auth) navigate("/app");
+    }, [auth]);
 
     const handleInput = (e) => {
         setEmail(e.target.value);

@@ -4,7 +4,6 @@ import useCourseStore from '../../store/useCourseStore';
 import useQuizStore from '../../store/useQuizStore';
 import { Breadcrumbs, Button, Card } from '@material-tailwind/react';
 import ReactMarkdown from 'react-markdown';
-import breaks from 'remark-breaks';
 import Axios from 'axios';
 import "./Chapter.scss"
 import Cookies from 'js-cookie';
@@ -72,7 +71,7 @@ const Chapter = () => {
     }
 
     return (
-        <Card className='w-full p-2 flex items-center justify-center overflow-y-scroll'>
+        <Card className='w-full p-2 md:px-6 flex items-center justify-center overflow-y-scroll'>
             <div className='w-full max-w-screen-xl h-full'>
                 <div className='flex justify-between'>
                     <h1 className='text-xl md:text-3xl lg:text-5xl text-black'>{chapter?.title}</h1>

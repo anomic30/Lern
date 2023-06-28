@@ -21,7 +21,7 @@ const Main = () => {
     if(!auth) return <h1>Loading...</h1>
 
     return (
-        <div className='Main'>
+        <div className='w-full max-h-screen flex gap-4 bg-gray-100 sm:p-4 box-border'>
             <Sidebar />
             <Outlet />
         </div>

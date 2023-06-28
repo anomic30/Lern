@@ -1,5 +1,4 @@
 import {
-    PresentationChartBarIcon,
     CubeTransparentIcon,
     ShoppingBagIcon,
     UserCircleIcon,
@@ -9,13 +8,16 @@ import {
     ArrowLeftOnRectangleIcon,
     RectangleGroupIcon,
     BookOpenIcon,
+    PuzzlePieceIcon,
+    Squares2X2Icon,
+    PresentationChartBarIcon
 } from "@heroicons/react/24/outline";
 
 export const sidebarRoutes = [
     {
         path: '/app',
         name: 'Dashboard',
-        icon: RectangleGroupIcon
+        icon: Squares2X2Icon
     },
     {
         path: '/app/generate',
@@ -26,6 +28,16 @@ export const sidebarRoutes = [
         path: '/app/courses',
         name: 'Courses',
         icon: BookOpenIcon
+    },
+    {
+        path: '/app/quizzes',
+        name: 'Quizzes',
+        icon: PuzzlePieceIcon
+    },
+    {
+        path: '/app/insights',
+        name: 'Insights',
+        icon: PresentationChartBarIcon
     },
 ]
 

@@ -26,7 +26,8 @@ export const checkAuth = async (setAuth, setUser, logout) => {
         console.log(error);
     }
   } else {
-    window.location.href = "/";
+    alert("Please login again!");
+    window.location.href = "/login";
     logout();
   }
 };

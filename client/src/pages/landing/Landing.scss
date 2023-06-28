@@ -1,0 +1,14 @@
+.Landing {
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .flex-container {
+    align-content: center;
+  }
+}

@@ -50,7 +50,7 @@ const Sidebar = () => {
                 } ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
             >
                 <div className="px-4 py-2 flex justify-between">
-                    <img src={app_logo} alt="Lern" className='app-logo' onClick={() => navigate("/")} />
+                    <img src={app_logo} alt="Lern" className='app-logo cursor-pointer' onClick={() => navigate("/")} />
                     {isMobile && <button className="shadow-lg p-2"
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                     >
