@@ -15,6 +15,7 @@ const Quiz = () => {
     const [showResult, setShowResult] = useState(false);
     const [quizStarted, setQuizStarted] = useState(false);
     const user = useUserStore((state) => state.user);
+    const setUser = useUserStore((state) => state.setUser);
     const quiz = useQuizStore((state) => state.quiz);
     const setQuiz = useQuizStore((state) => state.setQuiz);
     const { quizId } = useParams();
@@ -30,6 +31,19 @@ const Quiz = () => {
                 }
             });
             setQuiz(quizResp.data.quiz);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const updateScore = async () => {
+        try {
+            const updateScoreResp = await Axios.post(APP_SERVER + "/api/user/quiz" + quizId, { score }, {
+                headers: {
+                    Authorization: "Bearer " + Cookies.get('token')
+                }
+            });
+            setUser(updateScoreResp.data.userData);
         } catch (error) {
             console.log(error);
         }
@@ -71,6 +85,7 @@ const Quiz = () => {
         });
         setScore(totalScore);
         setShowResult(true);
+        updateScore();
     };
 
     const handleRetakeQuiz = () => {

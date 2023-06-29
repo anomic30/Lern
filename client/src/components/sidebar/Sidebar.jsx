@@ -16,6 +16,7 @@ import {
 import {
     ArrowLeftOnRectangleIcon,
     Bars3BottomLeftIcon,
+    XMarkIcon,
 } from "@heroicons/react/24/solid";
 import useAuthStore from '../../store/useAuthStore';
 
@@ -39,8 +40,9 @@ const Sidebar = () => {
 
     return (
         <>
+            {isMobile && isSidebarOpen? <div className="fixed inset-0 bg-black opacity-25 z-40"></div>: null}
             {isMobile && (
-                <button className="fixed top-4 left-0 z-30 bg-red shadow-lg p-2"
+                <button className="fixed top-4 left-0 z-30 p-2"
                     onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                 >
                     <Bars3BottomLeftIcon className="h-5 w-5" />
@@ -51,10 +53,10 @@ const Sidebar = () => {
             >
                 <div className="px-4 py-2 flex justify-between">
                     <img src={app_logo} alt="Lern" className='app-logo cursor-pointer' onClick={() => navigate("/")} />
-                    {isMobile && <button className="shadow-lg p-2"
+                    {isMobile && <button className="p-2"
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                     >
-                        <Bars3BottomLeftIcon className="h-5 w-5" />
+                        <XMarkIcon className="h-5 w-5" />
                     </button>}
                 </div>
                 <List className='w-full'>

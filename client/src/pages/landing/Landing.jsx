@@ -32,7 +32,7 @@ const Landing = () => {
         </div>
       </Navbar>
 
-      <section className='mt-10 py-10 px-6 md:py-15 md:px-8 xl:py-28 xl:px-10 flex flex-col md:flex-row max-w-7xl bg-gray-100 rounded-xl'>
+      <section className='mt-10 py-10 px-6 md:py-15 md:px-8 xl:py-28 xl:px-10 flex flex-col md:flex-row max-w-7xl bg-gray-50 rounded-xl'>
         <div className="flex flex-1 items-center justify-center md:justify-start flex-col gap-10 md:pr-10 xl:pr-20">
           <div className="hero-head text-center md:text-left">
             <p className="text-4xl md:text-5xl lg:text-7xl ">
