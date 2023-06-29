@@ -69,7 +69,7 @@ const Chapter = () => {
             console.log(error);
         }
     }
-
+    
     return (
         <Card className='w-full p-2 md:px-6 flex items-center justify-center overflow-y-scroll'>
             <div className='w-full max-w-screen-xl h-full'>
@@ -77,11 +77,15 @@ const Chapter = () => {
                     <h1 className='text-xl md:text-3xl lg:text-5xl text-black'>{chapter?.title}</h1>
                     <Button onClick={generateQuiz}>Quiz</Button>
                 </div>
-                <div className='flex pt-2'>
+                {/* <div className='flex pt-2'>
                     <p className='cursor-pointer' onClick={() => navigate("/app/courses")}>Courses</p>
                     <p className='mx-2'>/</p>
                     <p className='cursor-pointer' onClick={() => navigate(-1)}>{course?.title}</p>
-                </div>
+                </div> */}
+                <Breadcrumbs className='px-0 bg-color-white my-2'>
+                    <p className='cursor-pointer opacity-60' onClick={() => navigate(-1)}>{course?.title}</p>
+                    <p className='cursor-pointer font-bold' >{chapter?.title}</p>
+                </Breadcrumbs>
                 <div className='pt-4 pb-8'>
                     <ReactMarkdown className="line-break">{chapter?.content}</ReactMarkdown>
                 </div>
@@ -91,3 +95,38 @@ const Chapter = () => {
 }
 
 export default Chapter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

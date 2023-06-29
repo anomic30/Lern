@@ -56,10 +56,10 @@ const Generate = () => {
         <Card className="w-full p-2">
             <div className="flex flex-wrap h-screen">
                 <div className="relative w-full lg:w-1/2 md:w-2/3 pl-8 pr-8">
-                    <h1 className="text-xl md:text-3xl lg:text-5xl">Hello {user?.userName},</h1>
+                    <h1 className="text-xl md:text-3xl lg:text-5xl">Generate</h1>
                     {showCourse ?
                         <p className="text-md md:text-1xl lg:text-2xl mt-2">Here is your generated curriculum!</p> :
-                        <p className="text-md md:text-1xl lg:text-2xl mt-2">What do you want to lean today?</p>
+                        <p className="text-md md:text-1xl lg:text-2xl mt-2">What do you want to learn today?</p>
                     }
                     {isGenerating? <div>Generating your curriculum...</div>:showCourse ?
                         <ChapterList course={course} />

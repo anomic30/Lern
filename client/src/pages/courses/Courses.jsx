@@ -18,7 +18,7 @@ const Courses = () => {
         <Card className="w-full p-2 overflow-hidden max-h-screen">
             <div className="flex flex-wrap h-screen">
                 <div className="relative w-full lg:w-2/3 md:w-2/3 px-4 sm:px-8">
-                    <h1 className="text-xl md:text-3xl lg:text-5xl">Hello {user?.userName},</h1>
+                    <h1 className="text-xl md:text-3xl lg:text-5xl">Courses</h1>
                     <p className="text-md md:text-1xl lg:text-2xl mt-2 mb-8">View your course details here!</p>
 
                     {/* <div className="mt-8  flex border-5 border-neutral-800 gap-4 h-10 items-center px-4 rounded-xl bg-zinc-200

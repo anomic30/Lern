@@ -15,7 +15,7 @@ const Dashboard = () => {
   return (
     <Card className="w-full p-2">
       <div className='dashboard-hero p-16'>
-        <h1 className="text-6xl">Welcome</h1>
+        <h1 className="text-6xl">Welcome {user?.userName}</h1>
       </div>
     </Card>
   )

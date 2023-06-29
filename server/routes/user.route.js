@@ -205,7 +205,7 @@ router.get("/quiz/:quizId", authMiddleware, async (req, res) => {
 router.post("/quiz/:quizId", authMiddleware, async (req, res) => {
     const quizId = req.params.quizId;
     const score = req.body.score;
-    const magicId = req.magicId;
+    const magicId = req.magicId; 
 
     try {
         const userData = await User.findOne({
@@ -306,7 +306,7 @@ router.get("/analytics", authMiddleware, async (req, res) => {
         for(let quiz of userData.quizzes){
             if(quiz.score != null){
                 let obj = {
-                    x: quiz.timeTaken,
+                    x: quiz.takenAt,
                     y: quiz.score
                 }
                 quizScoreOverTheTime.push(obj);

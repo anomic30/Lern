@@ -19,6 +19,7 @@ module.exports = withMT({
         'cblack':'#303030',
         'cblue':'#369FFF',
         'cpink':'#FB8D93',
+        'lpink':'#FFC9CC',
         'cteal':'#00C6BA',
         ...colors,
       },
