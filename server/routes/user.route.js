@@ -204,7 +204,7 @@ router.get("/quiz/:quizId", authMiddleware, async (req, res) => {
 //Route to update the user's score of a particular quiz
 router.post("/quiz/:quizId", authMiddleware, async (req, res) => {
     const quizId = req.params.quizId;
-    const score = req.body.score;
+    const totalScore = req.body.totalScore;
     const magicId = req.magicId; 
 
     try {
@@ -219,7 +219,7 @@ router.post("/quiz/:quizId", authMiddleware, async (req, res) => {
         //Find thge quizId in the userData quizzes array and update the score
         for(let quiz of userData.quizzes){
             if(quiz.quizId == quizId){
-                quiz.score = score;
+                quiz.score = totalScore;
                 quiz.takenAt = new Date().toISOString();
                 break;
             }
@@ -236,7 +236,7 @@ router.post("/quiz/:quizId", authMiddleware, async (req, res) => {
 });
 
 //Route to mark a user's course as completed
-router.post("/course/:courseId", authMiddleware, async (req, res) => {
+router.post("/course/complete/:courseId", authMiddleware, async (req, res) => {
     const courseId = req.params.courseId;
     const magicId = req.magicId;
 
@@ -253,7 +253,7 @@ router.post("/course/:courseId", authMiddleware, async (req, res) => {
         for(let course of userData.courses){
             if(course.courseId == courseId){
                 course.completedAt = new Date().toISOString();
-                course.completed = true;
+                course.finished = true;
                 break;
             }
         }
@@ -267,6 +267,38 @@ router.post("/course/:courseId", authMiddleware, async (req, res) => {
         });
     }
 });
+
+//Route to toggle a user's chapter as completed
+router.post("/chapter/complete", authMiddleware, async (req, res) => {
+    const courseId = req.body.courseId;
+    const chapterId = req.body.chapterId;
+
+    try {
+        //Find the course with courseId
+        let course = await Course.findById(courseId);
+        if (!course) {
+            return res.status(200).send(
+                "Course does not exist"
+            );
+        }
+        //Find the chapter with chapterId inside the course and update completedAt
+        for (let chapter of course.chapters) {
+            if (chapter._id == chapterId) {
+                chapter.completed = !chapter.completed;
+                break;
+            }
+        }
+        await course.save();
+        return res.status(200).json({
+            course
+        });
+    } catch (error) {
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
 
 //Route to get user analytics
 router.get("/analytics", authMiddleware, async (req, res) => {
@@ -307,7 +339,8 @@ router.get("/analytics", authMiddleware, async (req, res) => {
             if(quiz.score != null){
                 let obj = {
                     x: quiz.takenAt,
-                    y: quiz.score
+                    y: quiz.score,
+                    z: quiz.title,
                 }
                 quizScoreOverTheTime.push(obj);
             }
@@ -326,6 +359,7 @@ router.get("/analytics", authMiddleware, async (req, res) => {
                 let obj = {
                     x: course.finishedAt,
                     y: completedCoursesCount,
+                    z: course.title,
                 };
 
                 completedCoursesOverTime.push(obj);

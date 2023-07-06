@@ -49,6 +49,9 @@ const UserSchema = new mongoose.Schema({
         ref: 'Course', // Reference to the course model
         required: true,
       },
+      title: {
+        type: String,
+      },
       quizId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Quiz', // Reference to the quiz model
