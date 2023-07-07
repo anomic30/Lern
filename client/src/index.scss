@@ -26,3 +26,33 @@ button {
 .app-logo{
   height: 2em;
 }
+
+img{
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+
+}
+::-webkit-scrollbar-track {
+  background-color:  #fcfcfc;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(101, 101, 101);
+  background: linear-gradient(0deg, rgb(101, 101, 101) 0%, rgb(101, 101, 101) 54%, rgb(101, 101, 101) 100%);
+  border-radius: 10px;
+}
+
+//If screen width is less then 896px, then the height of the courses-con will be 100vh
+@media only screen and (max-width: 896px) {
+  #resp-con{
+      max-height: calc(100vh - 4rem);
+  }
+}

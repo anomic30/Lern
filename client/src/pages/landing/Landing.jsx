@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Landing.scss'
 import useAuthStore from '../../store/useAuthStore'
 import useUserStore from '../../store/useUserStore'
@@ -16,17 +16,33 @@ import f1 from '../../assets/images/F1.png'
 import f2 from '../../assets/images/F2.png'
 import f3 from '../../assets/images/F3.png'
 import appLogo from '../../assets/icons/logo.svg'
+import gcp from '../../assets/icons/gcp.svg'
+import mdb from '../../assets/icons/mongodb.svg'
+import bard from '../../assets/icons/bard.svg'
+import join from '../../assets/images/community.png'
+import isLogged from '../../services/logged'
+
+
 
 
 const Landing = () => {
   const navigate = useNavigate();
+  const auth = useAuthStore(state => state.auth);
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    async function checkLogged() {
+      const logged = await isLogged();
+      setLoggedIn(logged);
+    }
+    checkLogged();
+  }, [])
+
   return (
     <div className='Landing'>
-
       <Navbar className="nav-con max-w-7xl">
         <div className="container mx-auto flex items-center justify-between ">
           <img src={appLogo} alt="logo" className='w-20' />
-          <Button size="md" className="bg-cblack font-medium text-sm hover:shadow-sd" onClick={()=>navigate("/login")}>
+          <Button size="md" className="bg-cblack font-medium text-sm hover:shadow-sd rounded-md" onClick={() => navigate("/login")}>
             Sign In
           </Button>
         </div>
@@ -46,11 +62,11 @@ const Landing = () => {
             Experience a customized learning journey that adapts to your unique needs and empowers you to excel in any subject.
           </div>
           <div className="w-full hero-btn flex items-center justify-center md:justify-start gap-10">
-            <Button size="md" className="bg-cblack font-medium text-sm hover:shadow-sd" onClick={()=>navigate("/login")}>
-            Start Learning
+            <Button size="md" className="bg-cblack font-medium text-sm hover:shadow-sd" onClick={() => navigate("/app")}>
+              Start Learning
             </Button>
             <Button size="md" variant='outlined' className="border-cblack font-medium text-cblack text-sm">
-            Join Us
+              Join Us
             </Button>
           </div>
         </div>
@@ -126,11 +142,34 @@ const Landing = () => {
         </div>
       </section>
 
+
+      <p className="feature-head text-4xl md:text-5xl lg:text-7xl text-center md:pt-24 ">Powered By</p>
+      <section className='py-10 w-full max-w-7xl'>
+        <div className="flex lg:flex-row justify-between item-center flex-wrap flex-container">
+          <img src={bard} alt={bard} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
+          <img src={mdb} alt={mdb} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
+          <img src={gcp} alt={gcp} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
+        </div>
+      </section>
+
+      <p className="text-4xl md:text-5xl lg:text-7xl text-center pt-15 md:pt-24 ">Grow with Us</p>
+
+      <section className='py-4 md:py-10 w-full flex flex-col items-center justify-center max-w-7xl'>
+        <p className="text-xl md:text-2xl py-4 px-4 lg:px-0 text-cblack text-center">
+          Join our community to grow and study with other members
+        </p>
+        <Button size="md" className="bg-cblack font-medium text-sm hover:shadow-sd rounded-md" onClick={() => navigate("/login")}>
+          Join Us
+        </Button>
+        <div className='w-full h-96 mt-4 community-img'></div>
+      </section>
+
+      <hr className="w-full my-8 border-gray-200" />
       <footer className="w-full bg-white p-4 max-w-7xl">
         <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
           <img src={appLogo} alt="logo-ct" className="w-20" />
           <div className="flex items-center gap-x-6 mt-4 md:mt-0">
-            <Button
+            {/* <Button
               size="md"
               className="bg-cblack font-medium text-white hover:shadow-blue-gray-50 p-2 rounded-md shadow-none"
             >
@@ -142,7 +181,7 @@ const Landing = () => {
               className="border-cblack p-2 font-medium text-cblack hover:bg-gray-100 rounded-md shadow-none"
             >
               Join Us
-            </Button>
+            </Button> */}
           </div>
         </div>
       </footer>

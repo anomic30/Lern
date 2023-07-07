@@ -1,7 +1,20 @@
-.dashboard-hero{
-    background-image: url("../../assets/images/dashboard-hero.png");
-    height: 15rem;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: center;
+.Dashboard{
+    .dashboard-hero{
+        background-image: url("../../assets/images/dashboard-hero.png");
+        height: 15rem;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: right;
+    }
+
+    .generate img{
+        width:60%;
+    }
+    // .analytics img{
+    //     width:100%;
+    // }
+    // .quiz img{
+    //     width:100%;
+    // }
+
 }

@@ -11,4 +11,19 @@
   .flex-container {
     align-content: center;
   }
+
+  .company {
+    width: 20%;
+    aspect-ratio: 3/2;
+    object-fit:contain;
+  }
+
+  .community-img{
+    background-image: url("../../assets/images/community.png");
+    // height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0.5rem;
+}
 }

@@ -36,9 +36,9 @@ const Quiz = () => {
         }
     }
 
-    const updateScore = async () => {
+    const updateScore = async (totalScore) => {
         try {
-            const updateScoreResp = await Axios.post(APP_SERVER + "/api/user/quiz" + quizId, { score }, {
+            const updateScoreResp = await Axios.post(APP_SERVER + "/api/user/quiz/" + quizId, { totalScore }, {
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
                 }
@@ -85,7 +85,7 @@ const Quiz = () => {
         });
         setScore(totalScore);
         setShowResult(true);
-        updateScore();
+        updateScore(totalScore);
     };
 
     const handleRetakeQuiz = () => {
@@ -110,14 +110,14 @@ const Quiz = () => {
                 </div>
                 <div className="flex justify-between mt-4 sm:mt-8">
                     <button
-                        className="px-4 py-2 bg-emerald-300 text-white rounded"
+                        className="px-4 py-2 bg-qteal text-white rounded"
                         disabled={currentQuestionIndex === 0}
                         onClick={handlePreviousQuestion}
                     >
                         Previous
                     </button>
                     <button
-                        className="px-4 py-2 bg-emerald-300 text-white rounded"
+                        className="px-4 py-2 bg-qteal text-white rounded"
                         disabled={currentQuestionIndex === questions.length - 1}
                         onClick={handleNextQuestion}
                     >
@@ -137,7 +137,7 @@ const Quiz = () => {
                 <ul className="self-start list-disc ml-4">
                     {questions.map((question, index) => (
                         <li key={index} className="mb-1">
-                            {question.question}: {question.options[question.answer]}
+                            {question.question} <p className='text-emerald-500'>{question.options[question.answer]}</p>
                         </li>
                     ))}
                 </ul>
@@ -152,15 +152,15 @@ const Quiz = () => {
     };
 
     return (
-        <Card className="w-full p-2">
+        <Card className="w-full p-2" id="resp-con">
             <div className="flex flex-wrap h-screen">
                 <div className="flex flex-col justify-between w-full lg:w-1/2 md:w-2/3 px-4 sm:px-8">
                     <h1 className="text-3xl md:text-3xl lg:text-5xl">Quiz</h1>
 
                     {!quizStarted ? (
-                        <div className='h-3/6 w-full bg-emerald-100 self-center rounded-2xl flex flex-col content-center justify-center flex-wrap gap-2 md:gap-5'>
+                        <div className='h-3/6 w-full bg-dteal self-center rounded-2xl flex flex-col content-center justify-center flex-wrap gap-2 md:gap-5'>
                             <h1 className='text-xl md:text-3xl text-center'> Topic: {quiz?.title}</h1>
-                            <Button className='mx-auto bg-emerald-500' onClick={() => setQuizStarted(true)}>Start</Button>
+                            <Button className='mx-auto bg-cteal' onClick={() => setQuizStarted(true)}>Start</Button>
                         </div>
                     ) : (
                         <div className="container mx-auto px-4 py-8">
@@ -171,7 +171,7 @@ const Quiz = () => {
                                     {renderQuizQuestions()}
                                     <div className="flex justify-end mt-4">
                                         <button
-                                            className="px-4 py-2 bg-emerald-500 text-white rounded"
+                                            className="px-4 py-2 bg-cteal text-white rounded"
                                             onClick={handleQuizSubmit}
                                         >
                                             Submit
@@ -182,7 +182,7 @@ const Quiz = () => {
                         </div>
                     )}
 
-                    <p className='pb-4'>This quiz is AI-generated and for entertainment purposes only.</p>
+                    <p className='pb-4'>This quiz is AI-generated.</p>
                 </div>
                 <div className="hidden w-full lg:w-1/2 md:w-1/3 md:block overflow-hidden quiz-img"></div>
             </div>

@@ -14,6 +14,7 @@ import Quiz from '../pages/quiz/Quiz';
 import Quizzes from '../pages/quizzes/Quizzes';
 import Insights from '../pages/insights/Insights';
 import Sidebar from './sidebar/Sidebar';
+import Loading from './loading/Loading';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -24,6 +25,7 @@ const AnimatedRoutes = () => {
                 <Route exact path="/" element={<Landing />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/loading" element={<Loading />} />
                 <Route path="/app" element={<Main />}>
                     <Route path="/app" element={<Dashboard />} />
                     <Route path="/app/generate" element={<Generate />} />

@@ -19,5 +19,20 @@ export const suggestions = [
     },
     {
         name: "Neuroscience",
-    }
+    },
+    {
+        name: "Artificial Intelligence",
+    },
+    {
+        name: "Cloud Computing",
+    },
+    {
+        name: "Geography",
+    },
+    {
+        name: "Trigonometry",
+    },
+    {
+        name: "Time Complexity",
+    },
 ]

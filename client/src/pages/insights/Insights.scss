@@ -1,3 +1,15 @@
 .card-con{
-    max-height: calc(100vh - 20rem);
+    max-height: calc(100vh - 25rem);
+    border-radius: 10px;
+}
+
+.chart-con{
+    height: 100% !important;
+    width: 100% !important;
+}
+
+#card{
+    background-image: url('../../assets/images/gradient.png');
+    background-repeat: no-repeat;
+    background-position: right;
 }

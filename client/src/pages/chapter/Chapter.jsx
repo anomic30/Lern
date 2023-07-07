@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import useCourseStore from '../../store/useCourseStore';
 import useQuizStore from '../../store/useQuizStore';
@@ -8,6 +8,7 @@ import Axios from 'axios';
 import "./Chapter.scss"
 import Cookies from 'js-cookie';
 import useUserStore from '../../store/useUserStore';
+import { Spinner } from "@material-tailwind/react";
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
@@ -20,6 +21,7 @@ const Chapter = () => {
     const setChapterQuizId = useCourseStore(state => state.setChapterQuizId);
     const addQuiz = useUserStore(state => state.addQuiz);
     const setCourse = useCourseStore(state => state.setCourse);
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
@@ -55,6 +57,7 @@ const Chapter = () => {
         let topic = chapter.title;
 
         try {
+            setLoading(true)
             const quizResp = await Axios.post(APP_SERVER + "/api/user/generateQuiz", { courseId, chapterId, topic }, {
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
@@ -63,9 +66,11 @@ const Chapter = () => {
             addQuiz(quizResp.data.quizMetadata);
             setQuiz(quizResp.data.newQuiz);
             setChapterQuizId(chapterId, quizResp.data.newQuiz._id);
+            setLoading(false);
             console.log(quizResp.data.newQuiz);
             navigate(`/app/quiz/${quizResp.data.newQuiz._id}`);
         } catch (error) {
+            setLoading(false);
             console.log(error);
         }
     }
@@ -75,7 +80,7 @@ const Chapter = () => {
             <div className='w-full max-w-screen-xl h-full'>
                 <div className='flex justify-between'>
                     <h1 className='text-xl md:text-3xl lg:text-5xl text-black'>{chapter?.title}</h1>
-                    <Button onClick={generateQuiz}>Quiz</Button>
+                    <Button onClick={generateQuiz} disabled={loading}>{ loading? <Spinner/>: "Quiz"}</Button>
                 </div>
                 {/* <div className='flex pt-2'>
                     <p className='cursor-pointer' onClick={() => navigate("/app/courses")}>Courses</p>

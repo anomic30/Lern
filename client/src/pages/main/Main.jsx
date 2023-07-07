@@ -8,6 +8,7 @@ import useUserStore from '../../store/useUserStore';
 import { checkAuth } from '../../services/checkAuth';
 import { useMediaQuery } from 'react-responsive';
 import app_logo from '../../assets/icons/logo.svg'
+import Loading from '../../components/loading/Loading';
 
 const Main = () => {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Main = () => {
         !auth && checkAuth(setAuth, setUser, logout);
     }, []);
 
-    if (!auth) return <h1>Loading...</h1>
+    if (!auth) return <Loading/>
 
     return (
         <div className={`w-full relative ${isMobile ? 'block' : 'flex max-h-screen sm:p-4'} gap-4 bg-gray-100 box-border`}>

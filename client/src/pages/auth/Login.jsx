@@ -16,6 +16,7 @@ import useUserStore from '../../store/useUserStore';
 import googleIcon from "../../assets/icons/google.svg";
 import loginimg from "../../assets/images/loginimage.png";
 import magic from '../../services/magic';
+import isLogged from '../../services/logged';
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
@@ -27,10 +28,19 @@ const Login = () => {
     const setAuth = useAuthStore(state => state.setAuth);
     const setUser = useUserStore(state => state.setUser);
     const navigate = useNavigate();
+    const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
         if (auth) navigate("/app");
-    }, [auth]);
+        async function checkLogged() {
+            const logged = await isLogged();
+            if (logged) {
+                setLoggedIn(logged);
+                navigate("/app");
+            }
+        }
+        checkLogged();
+    }, []);
 
     const handleInput = (e) => {
         setEmail(e.target.value);
@@ -109,7 +119,7 @@ const Login = () => {
                                     color="blue-gray"
                                     className="flex items-center justify-center gap-3 "
                                 >
-                                    <img src={googleIcon} alt="logo"  />
+                                    <img src={googleIcon} alt="logo" />
                                     Continue with Google
                                 </Button>
                                 <p className="or">or</p>
@@ -123,7 +133,7 @@ const Login = () => {
                                 <a
                                     href="#"
                                     className="font-medium text-blue-500 transition-colors hover:text-blue-700"
-                                    onClick={()=>navigate("/register")}
+                                    onClick={() => navigate("/register")}
                                 >
                                     Sign up
                                 </a>

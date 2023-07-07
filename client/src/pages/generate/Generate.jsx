@@ -11,7 +11,9 @@ import generate_img from '../../assets/images/generate.png';
 import { suggestions } from './suggestions';
 import ChapterList from '../../components/chapterList/ChapterList';
 import useCourseStore from '../../store/useCourseStore';
-
+import { Player, Controls } from '@lottiefiles/react-lottie-player';
+import hourglass from '../../assets/images/hourglass.json';
+import Loading from '../../components/loading/Loading';
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
@@ -19,7 +21,6 @@ const Generate = () => {
     const auth = useAuthStore(state => state.auth);
     const user = useUserStore(state => state.user);
     const [topicName, setTopicName] = useState('');
-    const [suggestedTopic, setSuggestedTopic] = useState('');
     const [isGenerating, setIsGenerating] = useState(false);
     const [showCourse, setShowCourse] = useState(false);
     const setCourse = useCourseStore(state => state.setCourse);
@@ -50,18 +51,20 @@ const Generate = () => {
         }
     }
 
-    if (!auth) return <h1>Loading...</h1>
+    if (!auth) return <Loading/>
 
     return (
-        <Card className="w-full p-2">
+        <Card className="w-full p-2" id="resp-con">
             <div className="flex flex-wrap h-screen">
-                <div className="relative w-full lg:w-1/2 md:w-2/3 pl-8 pr-8">
-                    <h1 className="text-xl md:text-3xl lg:text-5xl">Generate</h1>
-                    {showCourse ?
+                <div className="relative w-full lg:w-1/2 md:w-2/3 px-4">
+                    <h1 className="text-2xl md:text-3xl lg:text-5xl">Generate</h1>
+                    {isGenerating? <p className="text-md md:text-1xl lg:text-2xl mt-2">Generating the best content...</p>:showCourse ?
                         <p className="text-md md:text-1xl lg:text-2xl mt-2">Here is your generated curriculum!</p> :
                         <p className="text-md md:text-1xl lg:text-2xl mt-2">What do you want to learn today?</p>
                     }
-                    {isGenerating? <div>Generating your curriculum...</div>:showCourse ?
+                    {isGenerating ? <div className="flex-1 flex flex-col justify-center items-center mt-10 md:mt-0">
+                        <Player autoplay loop src={hourglass} style={{ height: '100%', width: '100%' }} />
+                    </div> : showCourse ?
                         <ChapterList course={course} />
                         :
                         <div>
@@ -69,7 +72,7 @@ const Generate = () => {
 
                             <div className="gap-2 flex flex-wrap w-full lg:gap-0">
                                 <div className="w-full lg:w-3/4">
-                                    <Input size="lg" label="Type a topic" className='lg:h-20' onChange={(e) => setTopicName(e.target.value)} />
+                                        <Input size="lg" label="Type a topic" className='lg:h-20 md:text-xl' color="blue" onChange={(e) => setTopicName(e.target.value)} value={topicName} />
                                 </div>
                                 <div className="w-full lg:w-1/4">
                                     <Button fullWidth className='lg:h-20' onClick={handleTopicGeneration}>
@@ -86,8 +89,8 @@ const Generate = () => {
 
                             <div className='flex flex-wrap gap-2'>
                                 {suggestions.map((suggestion, index) => {
-                                    return <div onClick={() => setSuggestedTopic(suggestion.name)} key={index}>
-                                        <Chip value={suggestion.name} />
+                                    return <div onClick={() => setTopicName(suggestion.name)} key={index}>
+                                        <Chip value={suggestion.name} className='cursor-pointer'/>
                                     </div>
                                 })}
                             </div>

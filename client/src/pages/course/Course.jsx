@@ -4,7 +4,7 @@ import './Course.scss'
 import Axios from 'axios'
 import useCourseStore from '../../store/useCourseStore';
 import useUserStore from '../../store/useUserStore';
-import { Card } from '@material-tailwind/react';
+import { Button, Card } from '@material-tailwind/react';
 import Cookies from 'js-cookie';
 import ChapterList from '../../components/chapterList/ChapterList';
 
@@ -17,6 +17,7 @@ const Course = () => {
     const setCourse = useCourseStore(state => state.setCourse);
     const course = useCourseStore(state => state.course);
     const user = useUserStore(state => state.user);
+    const setUser = useUserStore((state) => state.setUser);
 
     const fetchCourseDetails = async () => {
         if (course?._id === courseId) {
@@ -37,13 +38,28 @@ const Course = () => {
         }
     }
 
+    const markCourseAsCompleted = async () => {
+        try {
+            const resp = await Axios.post(APP_SERVER + `/api/user/course/complete/${courseId}`, {}, {
+                headers: {
+                    Authorization: "Bearer " + Cookies.get('token')
+                }
+            });
+            console.log(resp.data);
+            setUser(resp.data.userData);
+            alert("Course marked as completed!");
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     useEffect(() => {
         if (!courseId) return navigate('/app/courses');
         fetchCourseDetails();
     }, [])
 
     return (
-        <Card className="w-full p-2">
+        <Card className="w-full p-2" id="resp-con">
             {/* <div className="relative w-full lg:w-1/2 md:w-2/3 px-4 sm:px-8">
                 <h1 className="text-xl md:text-3xl lg:text-5xl">Hello {user?.userName},</h1>
                 <p className="text-md md:text-1xl lg:text-2xl mt-2">View your course details here!</p>
@@ -51,9 +67,13 @@ const Course = () => {
             <Chapters course={course}/>             */}
             <div className="flex flex-wrap h-screen">
                 <div className="relative w-full lg:w-1/2 md:w-2/3 px-4 sm:px-8">
-                    <h1 className="text-xl md:text-3xl lg:text-5xl">{course?.title}</h1>
+                    <h1 className="text-2xl md:text-3xl lg:text-5xl">{course?.title}</h1>
                     <ChapterList course={course} />
-                    <p className='absolute bottom-4 w-[90%]'>The generated curriculum provided by this app aims to foster curiosity, knowledge, and learning. It should be used as a helpful tool to supplement your educational journey.</p>
+                    <div className='w-full flex justify-end p-2 pt-4'>
+                    <Button variant="outlined" ripple={false} onClick={markCourseAsCompleted} className='text-md py-2'>Mark as completed</Button>
+
+                    </div>
+                    {/* <p className='absolute bottom-4 w-[90%]'>The generated curriculum provided by this app aims to foster curiosity, knowledge, and learning. It should be used as a helpful tool to supplement your educational journey.</p> */}
                 </div>
                 <div className="hidden w-full lg:w-1/2 md:w-1/3 md:block overflow-hidden course-img"></div>
             </div>
