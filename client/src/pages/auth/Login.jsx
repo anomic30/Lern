@@ -17,6 +17,9 @@ import googleIcon from "../../assets/icons/google.svg";
 import loginimg from "../../assets/images/loginimage.png";
 import magic from '../../services/magic';
 import isLogged from '../../services/logged';
+import appLogo from '../../assets/icons/logo.svg'
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
@@ -52,14 +55,20 @@ const Login = () => {
     const handleLogin = async () => {
         setLoading(true);
         if (!email) {
-            alert("Please provide your email!");
+            toast("Please provide your email!",
+                {
+                    icon: '⚠️'
+                });
             setInputError(true);
             setLoading(false);
             return;
         } else {
             //check valid email
             if (!email.includes("@")) {
-                alert("Please enter a valid email address!");
+                toast("Please enter a valid email address!",
+                    {
+                        icon: '⚠️'
+                    });
                 setInputError(true);
                 setLoading(false);
                 return;
@@ -68,7 +77,11 @@ const Login = () => {
                 //checking if user exists
                 const checkResp = await Axios.post(APP_SERVER + "/api/auth/check", { email: email });
                 if (!checkResp.data.status) {
-                    alert("Please register first!");
+                    toast("Please register first!",
+                        {
+                            icon: '⚠️'
+                        });
+
                     setLoading(false);
                     return navigate("/register");
                 }
@@ -84,16 +97,18 @@ const Login = () => {
                     });
                     setUser(loginResp.data.user);
                     setAuth(loginResp.data.metadata);
-                    Cookies.set('token', didToken);
+                    // Cookies.set('token', didToken);
                     setLoading(false);
                     navigate("/app");
+                    const newToken = await magic.user.getIdToken({ lifespan: 7 * 24 * 60 * 60 });
+                    Cookies.set('token', newToken);
                 } catch (err) {
-                    alert("Login attempt failed. Please try again later!");
+                    toast.error("Login attempt failed. Please try again later!");
                     setLoading(false);
                     console.log(err);
                 }
             } catch (err) {
-                alert("Login attempt failed. Please try again later!");
+                toast.error("Login attempt failed. Please try again later!");
                 setLoading(false);
                 console.log(err);
             }
@@ -102,9 +117,12 @@ const Login = () => {
 
     return (
         <section>
+            <Toaster />
             <div className='auth-con '>
                 <div className='left-con'>
+                    <img src={appLogo} alt="logo" className='w-24 lg:w-30 self-start' />
                     <Card color="transparent" shadow={false} >
+
                         <Typography variant="h4" color="blue-gray" >
                             Log in
                         </Typography>
@@ -113,16 +131,7 @@ const Login = () => {
                         </Typography>
                         <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                             <div className="mb-4 flex flex-col gap-6">
-                                <Button
-                                    size="sm"
-                                    variant="outlined"
-                                    color="blue-gray"
-                                    className="flex items-center justify-center gap-3 "
-                                >
-                                    <img src={googleIcon} alt="logo" />
-                                    Continue with Google
-                                </Button>
-                                <p className="or">or</p>
+
                                 <Input size="lg" label="Email" onChange={(e) => handleInput(e)} error={inputError} />
                             </div>
                             <Button className="mt-6 " fullWidth onClick={handleLogin}>
@@ -140,6 +149,9 @@ const Login = () => {
                             </Typography>
                         </form>
                     </Card>
+                    <p className='text-center text-gray-500 text-xs'>
+                        &copy;2023 Lern. All rights reserved.
+                    </p>
                 </div>
                 <div className='right-con'>
                     <img src={loginimg} alt="image" />

@@ -1,5 +1,5 @@
-.Dashboard{
-    .dashboard-hero{
+.Dashboard {
+    .dashboard-hero {
         background-image: url("../../assets/images/dashboard-hero.png");
         height: 15rem;
         background-repeat: no-repeat;
@@ -7,9 +7,17 @@
         background-position: right;
     }
 
-    .generate img{
-        width:60%;
+    @media (max-width: 720px) {
+        .dashboard-hero {
+            height: 10rem;
+            background-image: none;
+        }
     }
+
+    .generate img {
+        width: 60%;
+    }
+
     // .analytics img{
     //     width:100%;
     // }

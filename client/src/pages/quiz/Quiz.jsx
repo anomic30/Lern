@@ -7,6 +7,7 @@ import useQuizStore from '../../store/useQuizStore';
 import { useNavigate, useParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Quiz = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -32,6 +33,7 @@ const Quiz = () => {
             });
             setQuiz(quizResp.data.quiz);
         } catch (error) {
+            toast.error("Something went wrong!");
             console.log(error);
         }
     }
@@ -45,6 +47,7 @@ const Quiz = () => {
             });
             setUser(updateScoreResp.data.userData);
         } catch (error) {
+            toast.error("Something went wrong!");
             console.log(error);
         }
     }
@@ -98,6 +101,7 @@ const Quiz = () => {
     const renderQuizQuestions = () => {
         return (
             <div className="flex flex-col">
+            <Toaster/>
                 <h2 className="text-2xl font-bold mb-8">{title}</h2>
                 <div className="flex flex-col space-y-2">
                     <p>{currentQuestion.question}</p>
@@ -131,18 +135,18 @@ const Quiz = () => {
     const renderResultPage = () => {
         return (
             <div className="flex flex-col items-center">
-                <h2 className="text-2xl font-bold mb-4">Quiz Result</h2>
-                <p className="mb-8 text-xl">Your Score: <span className='text-emerald-500'>{score}/4</span></p>
+                <h2 className="text-3xl font-bold mb-4">Quiz Result</h2>
+                <p className="mb-8 text-2xl">Your Score: <span className='text-cteal'>{score}/4</span></p>
                 <p className='self-start font-bold text-xl mb-4'>Correct Answers:</p>
                 <ul className="self-start list-disc ml-4">
                     {questions.map((question, index) => (
                         <li key={index} className="mb-1">
-                            {question.question} <p className='text-emerald-500'>{question.options[question.answer]}</p>
+                            {question.question} <p className='text-cteal'>{question.options[question.answer]}</p>
                         </li>
                     ))}
                 </ul>
                 <button
-                    className="px-4 py-2 bg-emerald-500 text-white rounded mt-4"
+                    className="px-4 py-2 bg-cteal text-white rounded mt-4"
                     onClick={handleRetakeQuiz}
                 >
                     Retake Quiz

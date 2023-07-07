@@ -23,6 +23,7 @@ import { Line } from 'react-chartjs-2';
 import gradient from '../../assets/images/gradient.svg'
 import Loading from '../../components/loading/Loading';
 import { Spinner } from "@material-tailwind/react";
+import { toast } from 'react-hot-toast';
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
@@ -78,6 +79,7 @@ const Insights = () => {
             console.log(user.courses);
         } catch (err) {
             setLoading(false);
+            toast.error("Something went wrong!");
             console.log(err);
         }
     }

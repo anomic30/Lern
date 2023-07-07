@@ -14,6 +14,7 @@ import useCourseStore from '../../store/useCourseStore';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import hourglass from '../../assets/images/hourglass.json';
 import Loading from '../../components/loading/Loading';
+import toast, { Toaster } from 'react-hot-toast';
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
@@ -29,7 +30,10 @@ const Generate = () => {
 
     const handleTopicGeneration = async () => {
         if (!topicName) {
-            alert("Please enter a topic name!");
+            toast("Please enter a topic name!",
+            {
+                icon: '⚠️'
+            });
             return;
         }
         console.log("Generating topic...");
@@ -47,6 +51,7 @@ const Generate = () => {
             console.log(genResp.data.newCourse);
         } catch (error) {
             setIsGenerating(false);
+            toast.error("Something went wrong. Please generate again!");
             console.log(error);
         }
     }
@@ -55,11 +60,12 @@ const Generate = () => {
 
     return (
         <Card className="w-full p-2" id="resp-con">
+        <Toaster/>
             <div className="flex flex-wrap h-screen">
                 <div className="relative w-full lg:w-1/2 md:w-2/3 px-4">
                     <h1 className="text-2xl md:text-3xl lg:text-5xl">Generate</h1>
-                    {isGenerating? <p className="text-md md:text-1xl lg:text-2xl mt-2">Generating the best content...</p>:showCourse ?
-                        <p className="text-md md:text-1xl lg:text-2xl mt-2">Here is your generated curriculum!</p> :
+                    {isGenerating? <p className="text-md md:text-1xl lg:text-2xl mt-2">Generating content, stay tuned...</p>:showCourse ?
+                        <p className="text-md md:text-1xl lg:text-2xl mt-2">Here is your generated course!</p> :
                         <p className="text-md md:text-1xl lg:text-2xl mt-2">What do you want to learn today?</p>
                     }
                     {isGenerating ? <div className="flex-1 flex flex-col justify-center items-center mt-10 md:mt-0">

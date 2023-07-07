@@ -20,9 +20,9 @@ import gcp from '../../assets/icons/gcp.svg'
 import mdb from '../../assets/icons/mongodb.svg'
 import bard from '../../assets/icons/bard.svg'
 import join from '../../assets/images/community.png'
+import discord from '../../assets/icons/discord.svg'
+import github from '../../assets/icons/github.svg'
 import isLogged from '../../services/logged'
-
-
 
 
 const Landing = () => {
@@ -52,16 +52,16 @@ const Landing = () => {
         <div className="flex flex-1 items-center justify-center md:justify-start flex-col gap-10 md:pr-10 xl:pr-20">
           <div className="hero-head text-center md:text-left">
             <p className="text-4xl md:text-5xl lg:text-7xl ">
-              Learn <span className='text-4xl md:text-5xl lg:text-7xl text-cteal'>Anything</span>,
+              Learn <span className='text-4xl md:text-5xl lg:text-7xl text-cblue'>Anything</span>,
             </p>
             <p className="text-4xl md:text-5xl lg:text-7xl ">
-              <span className='text-4xl md:text-5xl lg:text-7xl text-cpink'>Anytime</span>, <span className='text-4xl md:text-5xl lg:text-7xl text-cblue'>Anywhere</span>
+              <span className='text-4xl md:text-5xl lg:text-7xl text-cpink'>Anytime</span>, <span className='text-4xl md:text-5xl lg:text-7xl text-cteal'>Anywhere</span>
             </p>
           </div>
           <div className="hero-subhead text-2xl text-center md:text-left text-cblack">
             Experience a customized learning journey that adapts to your unique needs and empowers you to excel in any subject.
           </div>
-          <div className="w-full hero-btn flex items-center justify-center md:justify-start gap-10">
+          <div className="w-full hero-btn flex items-center justify-center md:justify-start gap-5">
             <Button size="md" className="bg-cblack font-medium text-sm hover:shadow-sd" onClick={() => navigate("/app")}>
               Start Learning
             </Button>
@@ -143,7 +143,7 @@ const Landing = () => {
       </section>
 
 
-      <p className="feature-head text-4xl md:text-5xl lg:text-7xl text-center md:pt-24 ">Powered By</p>
+      <p className=" text-4xl md:text-5xl lg:text-7xl text-center md:pt-24 ">Powered By</p>
       <section className='py-10 w-full max-w-7xl'>
         <div className="flex lg:flex-row justify-between item-center flex-wrap flex-container">
           <img src={bard} alt={bard} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
@@ -166,22 +166,14 @@ const Landing = () => {
 
       <hr className="w-full my-8 border-gray-200" />
       <footer className="w-full bg-white p-4 max-w-7xl">
-        <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+        <div className="flex flex-row flex-wrap items-center justify-between gap-y-6 gap-x-12 text-center md:justify-between">
           <img src={appLogo} alt="logo-ct" className="w-20" />
-          <div className="flex items-center gap-x-6 mt-4 md:mt-0">
-            {/* <Button
-              size="md"
-              className="bg-cblack font-medium text-white hover:shadow-blue-gray-50 p-2 rounded-md shadow-none"
-            >
-              Start Learning
-            </Button>
-            <Button
-              size="md"
-              variant="outlined"
-              className="border-cblack p-2 font-medium text-cblack hover:bg-gray-100 rounded-md shadow-none"
-            >
-              Join Us
-            </Button> */}
+          {/* <p className="">
+            ©2023 Lern
+          </p> */}
+          <div className="flex gap-4">
+            <img src={github} alt="github" className='w-8 cursor-pointer' />
+            <a href="https://discord.gg/Ne58SwxSR9"><img src={discord} alt="discord" className='w-8 cursor-pointer' /></a> 
           </div>
         </div>
       </footer>

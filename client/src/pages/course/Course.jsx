@@ -7,6 +7,7 @@ import useUserStore from '../../store/useUserStore';
 import { Button, Card } from '@material-tailwind/react';
 import Cookies from 'js-cookie';
 import ChapterList from '../../components/chapterList/ChapterList';
+import toast, { Toaster } from 'react-hot-toast';
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
@@ -34,6 +35,7 @@ const Course = () => {
             setCourse(courseResp.data.course);
             console.log(courseResp.data.course);
         } catch (err) {
+            toast.error("Something went wrong!");
             console.log(err);
         }
     }
@@ -47,7 +49,7 @@ const Course = () => {
             });
             console.log(resp.data);
             setUser(resp.data.userData);
-            alert("Course marked as completed!");
+            toast.success("Course marked as completed!");
         } catch (err) {
             console.log(err);
         }
@@ -60,6 +62,7 @@ const Course = () => {
 
     return (
         <Card className="w-full p-2" id="resp-con">
+        <Toaster/>
             {/* <div className="relative w-full lg:w-1/2 md:w-2/3 px-4 sm:px-8">
                 <h1 className="text-xl md:text-3xl lg:text-5xl">Hello {user?.userName},</h1>
                 <p className="text-md md:text-1xl lg:text-2xl mt-2">View your course details here!</p>

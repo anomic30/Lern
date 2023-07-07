@@ -9,6 +9,7 @@ import "./Chapter.scss"
 import Cookies from 'js-cookie';
 import useUserStore from '../../store/useUserStore';
 import { Spinner } from "@material-tailwind/react";
+import toast, { Toaster } from 'react-hot-toast';
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
@@ -32,7 +33,8 @@ const Chapter = () => {
     }, []);
 
     const fetchCourseDetails = async () => {
-        if (course?._id === courseId) {
+        if(!courseId) return;
+        if (courseId && (course?._id === courseId)) {
             console.log("Already fetched course details");
             return
         }
@@ -46,6 +48,7 @@ const Chapter = () => {
             setCourse(courseResp.data.course);
             console.log(courseResp.data.course);
         } catch (err) {
+            toast.error("Something went wrong!");
             console.log(err);
         }
     }
@@ -71,12 +74,14 @@ const Chapter = () => {
             navigate(`/app/quiz/${quizResp.data.newQuiz._id}`);
         } catch (error) {
             setLoading(false);
+            toast.error("Something went wrong!");
             console.log(error);
         }
     }
     
     return (
         <Card className='w-full p-2 md:px-6 flex items-center justify-center overflow-y-scroll'>
+        <Toaster/>
             <div className='w-full max-w-screen-xl h-full'>
                 <div className='flex justify-between'>
                     <h1 className='text-xl md:text-3xl lg:text-5xl text-black'>{chapter?.title}</h1>

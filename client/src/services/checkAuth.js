@@ -2,6 +2,7 @@ import magic from './magic'; // Assuming you have imported the 'magic' library
 import Cookies from 'js-cookie';
 import Axios from 'axios';
 
+
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
 export const checkAuth = async (setAuth, setUser, logout) => {
@@ -9,7 +10,7 @@ export const checkAuth = async (setAuth, setUser, logout) => {
   console.log(isLoggedIn)
   if (isLoggedIn) {
     const authData = await magic.user.getInfo();
-    const newToken = await magic.user.getIdToken({lifespan: 24 * 60 * 60});
+    const newToken = await magic.user.getIdToken({lifespan: 7 * 24 * 60 * 60});
     Cookies.set('token', newToken);
     setAuth(authData);
 

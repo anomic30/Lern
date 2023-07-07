@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import useCourseStore from '../../store/useCourseStore';
 import Cookies from 'js-cookie';
+import toast, { Toaster } from 'react-hot-toast';
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
@@ -32,12 +33,14 @@ const ChapterList = ({ course }) => {
             });
             setCourse(completionResp.data.course);
         } catch (error) {
+            toast.error("Something went wrong!");
             console.log(error);
         }
     }
 
     return (
         <div className='mt-10 grow'>
+        <Toaster/>
             <div className="w-full mb-10">
                 <div className="flex items-center justify-between gap-4 mb-2">
                     <Typography color="blue" variant="h6">Completed</Typography>
