@@ -1,9 +1,12 @@
 export const suggestions = [
     {
-        name: "Quantum Computing",
+        name: "Artificial Intelligence",
     },
     {
-        name: "Astronomy",
+        name: "Genetics",
+    },
+    {
+        name: "Quantum Computing",
     },
     {
         name: "Cybersecurity",
@@ -12,27 +15,15 @@ export const suggestions = [
         name: "Physics",
     },
     {
-        name: "Genetics",
-    },
-    {
         name: "Blockchain",
     },
     {
         name: "Neuroscience",
     },
     {
-        name: "Artificial Intelligence",
-    },
-    {
         name: "Cloud Computing",
     },
     {
-        name: "Geography",
-    },
-    {
-        name: "Trigonometry",
-    },
-    {
-        name: "Time Complexity",
+        name: "Robotics",
     },
 ]

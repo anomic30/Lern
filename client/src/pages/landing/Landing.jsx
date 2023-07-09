@@ -22,6 +22,9 @@ import bard from '../../assets/icons/bard.svg'
 import discord from '../../assets/icons/discord.svg'
 import github from '../../assets/icons/github.svg'
 import isLogged from '../../services/logged'
+import { motion } from 'framer-motion';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 
 const Landing = () => {
@@ -29,6 +32,8 @@ const Landing = () => {
   const auth = useAuthStore(state => state.auth);
   const [loggedIn, setLoggedIn] = useState(false);
   useEffect(() => {
+    AOS.init();
+    AOS.refresh();
     async function checkLogged() {
       const logged = await isLogged();
       setLoggedIn(logged);
@@ -37,7 +42,11 @@ const Landing = () => {
   }, [])
 
   return (
-    <div className='Landing'>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      className='Landing'>
       <Navbar className="nav-con max-w-7xl">
         <div className="container mx-auto flex items-center justify-between ">
           <img src={appLogo} alt="logo" className='w-20' />
@@ -61,7 +70,7 @@ const Landing = () => {
             Experience a customized learning journey that adapts to your unique needs and empowers you to excel in any subject.
           </div>
           <div className="w-full hero-btn flex items-center justify-center md:justify-start gap-5">
-            <Button size="md" className="bg-cblack font-medium text-sm hover:shadow-sd" onClick={() => navigate("/app")}>
+            <Button size="md" className="bg-cblack font-medium text-sm hover:shadow-sd" onClick={() => navigate("/login")}>
               Start Learning
             </Button>
             <a href="https://discord.gg/Ne58SwxSR9" target='_blank' className='text-cblack no-underline'>
@@ -83,7 +92,7 @@ const Landing = () => {
       {/* Feature 1 */}
 
       <section className='py-2 w-full max-w-7xl'>
-        <div className="flex flex-col lg:flex-row justify-between item-center flex-wrap flex-container">
+        <div data-aos="fade-up" className="flex flex-col lg:flex-row justify-between item-center flex-wrap flex-container">
           <img src={f1} alt="AI" className='feature-image' />
           <div className='max-w-xl flex flex-col justify-center item-center'>
             <div className="feature-head text-center lg:text-left py-10">
@@ -104,7 +113,7 @@ const Landing = () => {
       {/* Feature 2 */}
 
       <section className='py-20 w-full max-w-7xl'>
-        <div className="flex flex-col lg:flex-row-reverse justify-between item-center flex-wrap flex-container">
+        <div data-aos="fade-up" className="flex flex-col lg:flex-row-reverse justify-between item-center flex-wrap flex-container">
           <img src={f2} alt="AI" className='feature-image' />
           <div className='max-w-xl flex flex-col justify-center item-center'>
             <div className="feature-head text-center lg:text-left py-10">
@@ -125,7 +134,7 @@ const Landing = () => {
       {/* Feature 3 */}
 
       <section className='py-20 w-full max-w-7xl'>
-        <div className="flex flex-col lg:flex-row justify-between item-center flex-wrap flex-container">
+        <div data-aos="fade-up" className="flex flex-col lg:flex-row justify-between item-center flex-wrap flex-container">
           <img src={f3} alt="AI" className='feature-image' />
           <div className='max-w-xl flex flex-col justify-center item-center'>
             <div className="feature-head text-center lg:text-left py-10">
@@ -182,7 +191,7 @@ const Landing = () => {
         </div>
       </footer>
 
-    </div>
+    </motion.div>
   )
 }
 

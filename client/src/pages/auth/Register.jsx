@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import googleIcon from "../../assets/icons/google.svg";
 import appLogo from '../../assets/icons/logo.svg'
 import toast, { Toaster } from 'react-hot-toast';
+import { motion } from 'framer-motion';
+import { Spinner } from "@material-tailwind/react";
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
@@ -79,7 +81,10 @@ const Register = () => {
     }
 
     return (
-        <section>
+        <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}>
         <Toaster/>
             <div className='auth-con '>
                 <div className='left-con'>
@@ -97,8 +102,8 @@ const Register = () => {
                                 <Input size="lg" label="Name" onChange={(e) => handleInput(e, setUserName)} error={inputNameError} />
                                 <Input size="lg" label="Email" onChange={(e) => handleInput(e, setEmail)} error={inputEmailError} />
                             </div>
-                            <Button className="mt-6 bg-cblack" fullWidth onClick={handleRegistration}>
-                                Sign up
+                            <Button className="mt-6 bg-cblack hover:shadow-sd flex justify-center" fullWidth onClick={handleRegistration} disabled={loading}>
+                                { loading? <Spinner color="white" className="h-4 w-4" />: "Sign up"}
                             </Button>
                             <Typography color="gray" className="mt-4 text-center font-normal">
                                 Already have an account?{" "}
@@ -120,7 +125,7 @@ const Register = () => {
                     {/* <img src={loginimg} alt="image" /> */}
                 </div>
             </div>
-        </section>
+        </motion.div>
     )
 }
 

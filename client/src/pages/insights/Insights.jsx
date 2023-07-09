@@ -165,8 +165,8 @@ const Insights = () => {
                         <h1 className="text-5xl md:text-5xl lg:text-7xl text-center lg:text-left">{progressCourse}</h1>
                     </Card>
                 </div>
-                <div className="card-con mb-8 w-full h-48 md:h-full shadow-[0_2px_5px_rgb(0,0,0,0.1)]">
-                    {loading && <Spinner color="pink" className="h-12 w-12 absolute left-1/2" />}
+                <div className="card-con mb-8 w-full h-48 md:h-full shadow-[0_2px_5px_rgb(0,0,0,0.1)] flex justify-center">
+                    {loading && <Spinner color="gray" className="h-12 w-12" />}
                     {!loading && <Line ref={canvasRef} data={quizData} options={options} className='chart-con' />}
                 </div>
             </div>

@@ -48,7 +48,7 @@ const Sidebar = () => {
                     <Bars3BottomLeftIcon className="h-5 w-5" />
                 </button>
             )}
-            <Card className={`box-border h-[calc(100vh-2rem)] max-w-[18rem] p-2 shadow-xl shadow-blue-gray-900/5 ${isMobile ? 'h-full fixed inset-0 z-40 transform transition-all ease-in-out duration-300' : ''
+            <Card className={`box-border h-[calc(100vh-2rem)] max-w-[18rem] p-2 shadow-xl shadow-blue-gray-900/5 ${isMobile ? 'rounded-l-none h-full fixed inset-0 z-40 transform transition-all ease-in-out duration-300' : ''
                 } ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
             >
                 <div className="px-4 py-2 flex justify-between">

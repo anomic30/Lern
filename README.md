@@ -3,7 +3,7 @@
 <!-- PROJECT Intro -->
 <br />
 <div align="center">
-  <a href="" target="_blank">
+  <a href="https://lern.pages.dev/" target="_blank">
     <img src="./client/src/assets/icons/logo-small.svg" alt="Project Logo" height="100">
   </a>
     <h1>Lern</h1>
@@ -13,12 +13,12 @@
 
 ## About The Project
 
-<a href="" target="_blank">
+<a href="https://lern.pages.dev/" target="_blank">
     <img src="./client/src/assets/screenshots/hero.png" alt="Project Banner">
 </a>
 
 <!-- PROJECT SHIELDS -->
-![Bard](https://github-production-user-asset-6210df.s3.amazonaws.com/63467479/252057194-6f0778c5-6a47-405d-b1e9-7c58f7f28958.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230708%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230708T205157Z&X-Amz-Expires=300&X-Amz-Signature=dff21a72b663180a2e892a55c5b21ae582b987c0324306b42bdb1a457da43110&X-Amz-SignedHeaders=host&actor_id=63467479&key_id=0&repo_id=653230018)
+![Bard](https://neuron.infura-ipfs.io/ipfs/QmTwgwYJV5bx3wnvZAVRUP9a9tVGT58pFeycvhMWhrgkGF)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
@@ -26,6 +26,8 @@
 
 
 Welcome to **Lern**, the revolutionary learning platform that empowers users to explore and master any topic of their choice instantly. Leveraging the power of Google's Bard, Lern harnesses the cutting-edge capabilities of artificial intelligence to generate comprehensive courses tailored to individual learning needs. Say goodbye to lengthy search sessions and scattered resources – with Lern, knowledge is just a few clicks away!
+
+App: https://lern.pages.dev/
  
 
 **Features of our application**:

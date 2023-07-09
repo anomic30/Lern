@@ -156,7 +156,7 @@ const Quiz = () => {
     };
 
     return (
-        <Card className="w-full p-2" id="resp-con">
+        <Card className="w-full p-2">
             <div className="flex flex-wrap h-screen">
                 <div className="flex flex-col justify-between w-full lg:w-1/2 md:w-2/3 px-4 sm:px-8">
                     <h1 className="text-3xl md:text-3xl lg:text-5xl">Quiz</h1>
