@@ -12,14 +12,13 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import book from '../../assets/images/dancingbook.json'
-import f1 from '../../assets/images/F1.png'
-import f2 from '../../assets/images/F2.png'
-import f3 from '../../assets/images/F3.png'
+import f1 from '../../assets/images/F1.webp'
+import f2 from '../../assets/images/F2.webp'
+import f3 from '../../assets/images/F3.webp'
 import appLogo from '../../assets/icons/logo.svg'
 import gcp from '../../assets/icons/gcp.svg'
 import mdb from '../../assets/icons/mongodb.svg'
 import bard from '../../assets/icons/bard.svg'
-import join from '../../assets/images/community.png'
 import discord from '../../assets/icons/discord.svg'
 import github from '../../assets/icons/github.svg'
 import isLogged from '../../services/logged'
@@ -48,7 +47,7 @@ const Landing = () => {
         </div>
       </Navbar>
 
-      <section className='mt-10 py-10 px-6 md:py-15 md:px-8 xl:py-28 xl:px-10 flex flex-col md:flex-row max-w-7xl bg-gray-50 rounded-xl'>
+      <section className='mt-10 py-10 px-6 md:py-15 md:px-8 xl:py-28 xl:px-10 flex flex-col md:flex-row max-w-7xl bg-slate-50 rounded-xl'>
         <div className="flex flex-1 items-center justify-center md:justify-start flex-col gap-10 md:pr-10 xl:pr-20">
           <div className="hero-head text-center md:text-left">
             <p className="text-4xl md:text-5xl lg:text-7xl ">
@@ -65,9 +64,11 @@ const Landing = () => {
             <Button size="md" className="bg-cblack font-medium text-sm hover:shadow-sd" onClick={() => navigate("/app")}>
               Start Learning
             </Button>
-            <Button size="md" variant='outlined' className="border-cblack font-medium text-cblack text-sm">
-              Join Us
-            </Button>
+            <a href="https://discord.gg/Ne58SwxSR9" target='_blank' className='text-cblack no-underline'>
+              <Button size="md" variant="outlined" className="text-cblack font-medium text-sm hover:shadow-sd rounded-md border border-cblack">
+                Join Us
+              </Button>
+            </a>
           </div>
         </div>
 
@@ -77,11 +78,11 @@ const Landing = () => {
       </section>
 
 
-      <p className="feature-head text-4xl md:text-5xl lg:text-7xl text-center pt-20 md:py-20">Features</p>
+      <p className="feature-head text-4xl md:text-5xl lg:text-7xl text-center py-10 md:py-20">Features</p>
 
       {/* Feature 1 */}
 
-      <section className='py-20 w-full max-w-7xl'>
+      <section className='py-2 w-full max-w-7xl'>
         <div className="flex flex-col lg:flex-row justify-between item-center flex-wrap flex-container">
           <img src={f1} alt="AI" className='feature-image' />
           <div className='max-w-xl flex flex-col justify-center item-center'>
@@ -142,26 +143,29 @@ const Landing = () => {
         </div>
       </section>
 
+      <div className='bg-slate-50 w-full max-w-7xl p-8 mt-8 md:mt-20 rounded-xl'>
+        <p className=" text-4xl md:text-5xl lg:text-7xl text-center md:pt-2 ">Powered By</p>
+        <section className='py-10 w-full max-w-7xl'>
+          <div className="flex lg:flex-row justify-between item-center flex-wrap flex-container">
+            <img src={bard} alt={bard} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
+            <img src={mdb} alt={mdb} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
+            <img src={gcp} alt={gcp} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
+          </div>
+        </section>
+      </div>
 
-      <p className=" text-4xl md:text-5xl lg:text-7xl text-center md:pt-24 ">Powered By</p>
-      <section className='py-10 w-full max-w-7xl'>
-        <div className="flex lg:flex-row justify-between item-center flex-wrap flex-container">
-          <img src={bard} alt={bard} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
-          <img src={mdb} alt={mdb} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
-          <img src={gcp} alt={gcp} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
-        </div>
-      </section>
+      <p className="text-4xl md:text-5xl lg:text-7xl text-center mt-14 md:mt-24 ">Grow with Us</p>
 
-      <p className="text-4xl md:text-5xl lg:text-7xl text-center pt-15 md:pt-24 ">Grow with Us</p>
-
-      <section className='py-4 md:py-10 w-full flex flex-col items-center justify-center max-w-7xl'>
+      <section className='py-42md:py-10 w-full flex flex-col items-center justify-center max-w-7xl'>
         <p className="text-xl md:text-2xl py-4 px-4 lg:px-0 text-cblack text-center">
           Join our community to grow and study with other members
         </p>
-        <Button size="md" className="bg-cblack font-medium text-sm hover:shadow-sd rounded-md" onClick={() => navigate("/login")}>
-          Join Us
-        </Button>
-        <div className='w-full h-96 mt-4 community-img'></div>
+        <a href="https://discord.gg/Ne58SwxSR9" target='_blank'>
+          <Button size="md" className="bg-cblack font-medium text-sm hover:shadow-sd rounded-md">
+            Join Us
+          </Button>
+        </a>
+        <div className='w-full h-96 mt-8 community-img'></div>
       </section>
 
       <hr className="w-full my-8 border-gray-200" />
@@ -172,8 +176,8 @@ const Landing = () => {
             ©2023 Lern
           </p> */}
           <div className="flex gap-4">
-            <img src={github} alt="github" className='w-8 cursor-pointer' />
-            <a href="https://discord.gg/Ne58SwxSR9"><img src={discord} alt="discord" className='w-8 cursor-pointer' /></a> 
+            <a href="https://github.com/anomic30/Lern"><img src={github} alt="github" className='w-8 cursor-pointer' /></a>
+            <a href="https://discord.gg/Ne58SwxSR9"><img src={discord} alt="discord" className='w-8 cursor-pointer' /></a>
           </div>
         </div>
       </footer>

@@ -104,8 +104,8 @@ const Quiz = () => {
             <Toaster/>
                 <h2 className="text-2xl font-bold mb-8">{title}</h2>
                 <div className="flex flex-col space-y-2">
-                    <p>{currentQuestion.question}</p>
-                    {currentQuestion.options.map((option, index) => (
+                    <p>{currentQuestion?.question}</p>
+                    {currentQuestion?.options?.map((option, index) => (
                         <div key={index} className="flex items-center gap-2">
                             <Checkbox checked={selectedOptions[currentQuestionIndex] === index} onChange={() => handleOptionChange(index)} color='gray' />
                             <span>{option}</span>
@@ -139,7 +139,7 @@ const Quiz = () => {
                 <p className="mb-8 text-2xl">Your Score: <span className='text-cteal'>{score}/4</span></p>
                 <p className='self-start font-bold text-xl mb-4'>Correct Answers:</p>
                 <ul className="self-start list-disc ml-4">
-                    {questions.map((question, index) => (
+                    {questions?.map((question, index) => (
                         <li key={index} className="mb-1">
                             {question.question} <p className='text-cteal'>{question.options[question.answer]}</p>
                         </li>

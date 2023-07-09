@@ -2,7 +2,6 @@ import magic from './magic'; // Assuming you have imported the 'magic' library
 import Cookies from 'js-cookie';
 import Axios from 'axios';
 
-
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
 export const checkAuth = async (setAuth, setUser, logout) => {
@@ -28,7 +27,7 @@ export const checkAuth = async (setAuth, setUser, logout) => {
     }
   } else {
     alert("Please login again!");
-    window.location.href = "/login";
     logout();
+    window.location.href = "/login";
   }
 };

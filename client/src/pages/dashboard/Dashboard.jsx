@@ -4,10 +4,9 @@ import useAuthStore from '../../store/useAuthStore';
 import useUserStore from '../../store/useUserStore';
 import { Card, Button } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom'
-import dashboard_hero from '../../assets/images/dashboard-hero.png';
-import dtopic from '../../assets/images/dtopic.png';
-import dperf from '../../assets/images/dperf.png';
-import dtest from '../../assets/images/dtest.png';
+import dtopic from '../../assets/images/dtopic.webp';
+import dperf from '../../assets/images/dperf.webp';
+import dtest from '../../assets/images/dtest.webp';
 import Loading from '../../components/loading/Loading';
 
 const Dashboard = () => {
@@ -20,13 +19,13 @@ const Dashboard = () => {
 
   return (
     <Card className="w-full p-2 Dashboard overflow-y-auto">
-      <div className='dashboard-hero py-16 pl-6 mb-4 bg-dshcard rounded-lg shadow-md'>
+      <div className='dashboard-hero py-16 pl-6 mb-4 bg-slate-100 rounded-lg shadow-md'>
         <h1 className="text-4xl sm:text-5xl xl:text-6xl">Welcome {user?.userName}</h1>
       </div>
       <div className='flex flex-col md:flex-row gap-4 h-full '>
         <Card className=" bg-dshcard hover:bg-dblue transition duration-500 w-full h-min-60 md:h-full generate text-center p-6 lg:p-12 basis-2/5">
           <div className='flex justify-center'>
-            <img src={dtopic} alt="image" />
+            <img src={dtopic} alt="image" loading="lazy"/>
           </div>
 
           <h1 className="text-2xl md:text-3xl 2xl:text-5xl">Explore New Topics</h1>
@@ -41,7 +40,7 @@ const Dashboard = () => {
               <Button className='hidden lg:block mt-8 bg-cteal font-medium text-sm hover:shadow-tsd'onClick={()=>navigate("/app/quizzes")}>Test</Button>
             </div>
             <div className='flex '>
-              <img src={dtest} alt="image" className='object-contain' />
+              <img src={dtest} alt="image" className='object-contain' loading="lazy"/>
             </div>
           </Card>
           <Card className="bg-dshcard hover:bg-dpink transition duration-500 p-6 h-60 md:h-2/4 analytics flex flex-row justify-between items-center">
@@ -51,7 +50,7 @@ const Dashboard = () => {
               <Button className='hidden lg:block mt-8 bg-cpink font-medium text-sm hover:shadow-sd' onClick={()=>navigate("/app/insights")}>Check</Button>
             </div>
             <div className='flex '>
-              <img src={dperf} alt="image" className='object-contain' />
+              <img src={dperf} alt="image" className='object-contain' loading="lazy"/>
             </div>
           </Card>
         </div>

@@ -15,15 +15,20 @@
   .company {
     width: 20%;
     aspect-ratio: 3/2;
-    object-fit:contain;
+    object-fit: contain;
   }
 
-  .community-img{
-    background-image: url("../../assets/images/community.png");
-    // height: 100%;
+  @media screen and (max-width: 480px) {
+    .company {
+      width: 28%;
+    }
+  }
+
+  .community-img {
+    background-image: url("../../assets/images/community.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     border-radius: 0.5rem;
-}
+  }
 }

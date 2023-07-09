@@ -10,7 +10,6 @@ import {
 import Axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import googleIcon from "../../assets/icons/google.svg";
-import loginimg from "../../assets/images/loginimage.png";
 import appLogo from '../../assets/icons/logo.svg'
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -84,8 +83,7 @@ const Register = () => {
         <Toaster/>
             <div className='auth-con '>
                 <div className='left-con'>
-                <img src={appLogo} alt="logo" className='w-24 lg:w-30 self-start' />
-
+                <img src={appLogo} alt="logo" className='w-24 lg:w-30 self-start cursor-pointer' onClick={()=>navigate("/")}/>
                     <Card color="transparent" shadow={false} >
                         <Typography variant="h4" color="blue-gray" >
                             Sign Up
@@ -99,7 +97,7 @@ const Register = () => {
                                 <Input size="lg" label="Name" onChange={(e) => handleInput(e, setUserName)} error={inputNameError} />
                                 <Input size="lg" label="Email" onChange={(e) => handleInput(e, setEmail)} error={inputEmailError} />
                             </div>
-                            <Button className="mt-6" fullWidth onClick={handleRegistration}>
+                            <Button className="mt-6 bg-cblack" fullWidth onClick={handleRegistration}>
                                 Sign up
                             </Button>
                             <Typography color="gray" className="mt-4 text-center font-normal">
@@ -115,13 +113,12 @@ const Register = () => {
                         </form>
                     </Card>
                     <p className='text-center text-gray-500 text-xs'>
-                        &copy;2023 Lern. All rights reserved.
+                        &copy;2023 Lern
                     </p>
                 </div>
                 <div className='right-con'>
-                    <img src={loginimg} alt="image" />
+                    {/* <img src={loginimg} alt="image" /> */}
                 </div>
-
             </div>
         </section>
     )

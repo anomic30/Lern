@@ -7,7 +7,6 @@ import Cookies from 'js-cookie';
 import ReactMarkdown from 'react-markdown'
 import { Button, Card, Input, Chip, List, ListItem, ListItemSuffix, IconButton, } from '@material-tailwind/react';
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import generate_img from '../../assets/images/generate.png';
 import { suggestions } from './suggestions';
 import ChapterList from '../../components/chapterList/ChapterList';
 import useCourseStore from '../../store/useCourseStore';

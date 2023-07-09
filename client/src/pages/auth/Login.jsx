@@ -14,7 +14,6 @@ import useAuthStore from '../../store/useAuthStore';
 import useUserStore from '../../store/useUserStore';
 
 import googleIcon from "../../assets/icons/google.svg";
-import loginimg from "../../assets/images/loginimage.png";
 import magic from '../../services/magic';
 import isLogged from '../../services/logged';
 import appLogo from '../../assets/icons/logo.svg'
@@ -120,7 +119,7 @@ const Login = () => {
             <Toaster />
             <div className='auth-con '>
                 <div className='left-con'>
-                    <img src={appLogo} alt="logo" className='w-24 lg:w-30 self-start' />
+                    <img src={appLogo} alt="logo" className='w-24 lg:w-30 self-start cursor-pointer' onClick={()=>navigate("/")}/>
                     <Card color="transparent" shadow={false} >
 
                         <Typography variant="h4" color="blue-gray" >
@@ -134,7 +133,7 @@ const Login = () => {
 
                                 <Input size="lg" label="Email" onChange={(e) => handleInput(e)} error={inputError} />
                             </div>
-                            <Button className="mt-6 " fullWidth onClick={handleLogin}>
+                            <Button className="mt-6 bg-cblack" fullWidth onClick={handleLogin}>
                                 Log in
                             </Button>
                             <Typography color="gray" className="mt-4 text-center font-normal">
@@ -150,11 +149,11 @@ const Login = () => {
                         </form>
                     </Card>
                     <p className='text-center text-gray-500 text-xs'>
-                        &copy;2023 Lern. All rights reserved.
+                        &copy;2023 Lern
                     </p>
                 </div>
                 <div className='right-con'>
-                    <img src={loginimg} alt="image" />
+                    {/* <img src={loginimg} alt="image" /> */}
                 </div>
             </div>
         </section>
