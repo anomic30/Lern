@@ -80,10 +80,10 @@ const Generate = () => {
 
                             <div className="gap-2 flex flex-wrap w-full lg:gap-0">
                                 <div className="w-full lg:w-3/4">
-                                        <Input size="lg" label="Enter a topic" className='lg:h-20 md:text-xl' color="blue" onChange={(e) => setTopicName(e.target.value)} value={topicName} />
+                                        <Input size="lg" label="Enter a topic" className='lg:h-20 md:text-xl lg:rounded-r-none' color="blue" onChange={(e) => setTopicName(e.target.value)} value={topicName} />
                                 </div>
                                 <div className="w-full lg:w-1/4">
-                                    <Button fullWidth className='lg:h-20' onClick={handleTopicGeneration}>
+                                    <Button fullWidth className='lg:h-20 lg:rounded-l-none lg:text-sm lg:p-0 flex justify-center items-center' onClick={handleTopicGeneration}>
                                         Generate
                                     </Button>
                                 </div>

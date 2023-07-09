@@ -156,9 +156,9 @@ const Landing = () => {
         <p className=" text-4xl md:text-5xl lg:text-7xl text-center md:pt-2 ">Powered By</p>
         <section className='py-10 w-full max-w-7xl'>
           <div className="flex lg:flex-row justify-between item-center flex-wrap flex-container">
-            <img src={bard} alt={bard} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
-            <img src={mdb} alt={mdb} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
-            <img src={gcp} alt={gcp} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
+            <img data-aos="fade-up" data-aos-duration="700" src={bard} alt={bard} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
+            <img data-aos="fade-up" data-aos-duration="1000" src={mdb} alt={mdb} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
+            <img data-aos="fade-up" data-aos-duration="1300" src={gcp} alt={gcp} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
           </div>
         </section>
       </div>
