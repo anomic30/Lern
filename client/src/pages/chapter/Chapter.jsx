@@ -113,7 +113,7 @@ const Chapter = () => {
                     <Button onClick={generateQuiz} disabled={loading}>{loading ? <Spinner /> : "Quiz"}</Button>
                 </div>
                 <Breadcrumbs className='px-0 bg-color-white my-2'>
-                    <p className='cursor-pointer opacity-60' onClick={() => navigate(-1)}>{course?.title}</p>
+                    <p className='cursor-pointer opacity-60' onClick={() => navigate(`/app/course/${course._id}`)}>{course?.title}</p>
                     <p className='cursor-pointer font-bold' >{chapter?.title}</p>
                 </Breadcrumbs>
                 <div className='pt-4 pb-8'>
