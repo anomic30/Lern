@@ -114,14 +114,14 @@ const Quiz = () => {
                 </div>
                 <div className="flex justify-between mt-4 sm:mt-8">
                     <button
-                        className="px-4 py-2 bg-qteal text-white rounded"
+                        className={`px-4 py-2 rounded ${currentQuestionIndex === 0 ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-qteal text-white'}`}
                         disabled={currentQuestionIndex === 0}
                         onClick={handlePreviousQuestion}
                     >
                         Previous
                     </button>
                     <button
-                        className="px-4 py-2 bg-qteal text-white rounded"
+                        className={`px-4 py-2 rounded ${currentQuestionIndex === questions.length - 1 ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-qteal text-white'}`}
                         disabled={currentQuestionIndex === questions.length - 1}
                         onClick={handleNextQuestion}
                     >
