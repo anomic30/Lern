@@ -6,6 +6,7 @@ import Axios from 'axios';
 import useCourseStore from '../../store/useCourseStore';
 import Cookies from 'js-cookie';
 import toast, { Toaster } from 'react-hot-toast';
+import useUserStore from '../../store/useUserStore';
 
 const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
@@ -13,14 +14,24 @@ const ChapterList = ({ course }) => {
     const navigate = useNavigate();
     const setCourse = useCourseStore(state => state.setCourse);
     const [completionPercentage, setCompletionPercentage] = useState(0);
+    const user = useUserStore(state => state.user);
+    const setUser = useUserStore((state) => state.setUser);
 
     useEffect(() => {
+        console.log("User", user);
         if (course) {
             let completedChapters = 0;
             course.chapters.forEach(chapter => {
                 if (chapter.completed) completedChapters++;
             });
+            let percentage = (completedChapters / course.chapters.length) * 100;
             setCompletionPercentage(completedChapters / course.chapters.length * 100);
+            //find the course with course.id present in user.courses array
+            const courseObj = user.courses.find(courseObj => courseObj.courseId === course._id);
+            if (courseObj.finished) return;
+            if (percentage === 100) {
+                markCourseAsCompleted();
+            }
         }        
     },[course])
 
@@ -35,6 +46,20 @@ const ChapterList = ({ course }) => {
         } catch (error) {
             toast.error("Something went wrong!");
             console.log(error);
+        }
+    }
+
+    const markCourseAsCompleted = async () => {
+        try {
+            const resp = await Axios.post(APP_SERVER + `/api/user/course/complete/${course._id}`, {}, {
+                headers: {
+                    Authorization: "Bearer " + Cookies.get('token')
+                }
+            });
+            setUser(resp.data.userData);
+            toast.success("Course completed successfully!");
+        } catch (err) {
+            console.log(err);
         }
     }
 
@@ -68,7 +93,7 @@ const ChapterList = ({ course }) => {
                                 {chapter?.title}
                             </div>
 
-                            <ListItemSuffix>
+                            <ListItemSuffix onClick={() => navigate("chapter/" + chapter._id)}>
                                 <IconButton variant="text" color="blue-gray">
                                     <ChevronRightIcon className="h-5 w-5" />
                                 </IconButton>

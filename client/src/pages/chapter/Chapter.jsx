@@ -33,7 +33,7 @@ const Chapter = () => {
     }, []);
 
     const fetchCourseDetails = async () => {
-        if(!courseId) return;
+        if (!courseId) return;
         if (courseId && (course?._id === courseId)) {
             console.log("Already fetched course details");
             return
@@ -78,14 +78,28 @@ const Chapter = () => {
             console.log(error);
         }
     }
-    
+
+    const handleChaterCompletion = async (chapterId) => {
+        try {
+            const completionResp = await Axios.post(APP_SERVER + `/api/user/chapter/complete`, { courseId: course._id, chapterId }, {
+                headers: {
+                    Authorization: "Bearer " + Cookies.get('token')
+                }
+            });
+            setCourse(completionResp.data.course);
+        } catch (error) {
+            toast.error("Something went wrong!");
+            console.log(error);
+        }
+    }
+
     return (
         <Card className='w-full p-2 md:px-6 flex items-center justify-center overflow-y-scroll'>
-        <Toaster/>
+            <Toaster />
             <div className='w-full max-w-screen-xl h-full'>
                 <div className='flex justify-between'>
                     <h1 className='text-xl md:text-3xl lg:text-5xl text-black'>{chapter?.title}</h1>
-                    <Button onClick={generateQuiz} disabled={loading}>{ loading? <Spinner/>: "Quiz"}</Button>
+                    <Button onClick={generateQuiz} disabled={loading}>{loading ? <Spinner /> : "Quiz"}</Button>
                 </div>
                 {/* <div className='flex pt-2'>
                     <p className='cursor-pointer' onClick={() => navigate("/app/courses")}>Courses</p>
@@ -98,6 +112,9 @@ const Chapter = () => {
                 </Breadcrumbs>
                 <div className='pt-4 pb-8'>
                     <ReactMarkdown className="line-break">{chapter?.content}</ReactMarkdown>
+                </div>
+                <div className='py-4 flex justify-end'>
+                    <Button variant={chapter.completed? "filled" : "outlined"} onClick={() => handleChaterCompletion(chapter._id)} className='box-border text-md py-2 self-stretch'>{chapter.completed? "Completed" : "Mark as complete"}</Button>
                 </div>
             </div>
         </Card>

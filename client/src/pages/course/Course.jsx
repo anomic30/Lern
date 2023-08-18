@@ -40,21 +40,6 @@ const Course = () => {
         }
     }
 
-    const markCourseAsCompleted = async () => {
-        try {
-            const resp = await Axios.post(APP_SERVER + `/api/user/course/complete/${courseId}`, {}, {
-                headers: {
-                    Authorization: "Bearer " + Cookies.get('token')
-                }
-            });
-            console.log(resp.data);
-            setUser(resp.data.userData);
-            toast.success("Course marked as completed!");
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     useEffect(() => {
         if (!courseId) return navigate('/app/courses');
         fetchCourseDetails();
@@ -73,7 +58,6 @@ const Course = () => {
                     <h1 className="text-2xl md:text-3xl lg:text-5xl">{course?.title}</h1>
                     <ChapterList course={course} />
                     <div className='w-full flex justify-end p-2 pt-4'>
-                    <Button variant="outlined" ripple={false} onClick={markCourseAsCompleted} className='text-md py-2'>Mark as completed</Button>
 
                     </div>
                     {/* <p className='absolute bottom-4 w-[90%]'>The generated curriculum provided by this app aims to foster curiosity, knowledge, and learning. It should be used as a helpful tool to supplement your educational journey.</p> */}
