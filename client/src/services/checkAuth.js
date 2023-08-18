@@ -6,7 +6,6 @@ const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
 export const checkAuth = async (setAuth, setUser, logout) => {
   const isLoggedIn = await magic.user.isLoggedIn();
-  console.log(isLoggedIn)
   if (isLoggedIn) {
     const authData = await magic.user.getInfo();
     const newToken = await magic.user.getIdToken({lifespan: 7 * 24 * 60 * 60});
@@ -19,7 +18,6 @@ export const checkAuth = async (setAuth, setUser, logout) => {
                 Authorization: "Bearer " + newToken
             }
         });
-        console.log(userResp.data.userData)
         setUser(userResp.data.userData);
     } catch (error) {
         alert("Something went wrong!")

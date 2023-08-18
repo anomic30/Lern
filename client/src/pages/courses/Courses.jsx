@@ -13,7 +13,6 @@ const Courses = () => {
     const auth = useAuthStore(state => state.auth);
     const user = useUserStore(state => state.user);
     const[search,setSearch]=useState("");
-    console.log(user)
 
     const filteredCourses = user?.courses?.filter(course =>
         course.title.toLowerCase().includes(search.toLowerCase())

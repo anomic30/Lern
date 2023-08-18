@@ -33,25 +33,27 @@ const Register = () => {
         }
     }
 
-    const handleRegistration = async () => {
-        if (!email) {
-            toast("Please provide your email!",
-            {
-                icon: '⚠️'
-            });
+    const validateInput = () => {
+        if (!email.includes("@")) {
+            toast("Please enter a valid email!",{
+                    icon: '⚠️'
+                });
             setEmailError(true);
-            return;
+            return false;
         }
-        if (!userName) {
-            toast("Please provide your name!",
-            {
-                icon: '⚠️'
-            });
+        if (userName.length < 4) {
+            toast("Username should be atleast 4 characters", {
+                    icon: '⚠️'
+                });
             setNameError(true);
-            return;
+            return false;
         }
+        return true;
+    }
 
-        console.log(email, userName);
+    const handleRegistration = async (e) => {
+        e.preventDefault();
+        if (!validateInput()) return;
 
         setLoading(true);
         try {
@@ -96,13 +98,13 @@ const Register = () => {
                         <Typography color="gray" className="mt-1 ">
                             Enter your details to register.
                         </Typography>
-                        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+                        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={handleRegistration}>
                             <div className="mb-4 flex flex-col gap-6">
                                 
                                 <Input size="lg" label="Name" onChange={(e) => handleInput(e, setUserName)} error={inputNameError} />
                                 <Input size="lg" label="Email" onChange={(e) => handleInput(e, setEmail)} error={inputEmailError} />
                             </div>
-                            <Button className="mt-6 bg-cblack hover:shadow-sd flex justify-center" fullWidth onClick={handleRegistration} disabled={loading}>
+                            <Button className="mt-6 bg-cblack hover:shadow-sd flex justify-center" fullWidth type='submit' disabled={loading}>
                                 { loading? <Spinner color="white" className="h-4 w-4" />: "Sign up"}
                             </Button>
                             <Typography color="gray" className="mt-4 text-center font-normal">

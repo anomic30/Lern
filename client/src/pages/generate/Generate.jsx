@@ -29,10 +29,10 @@ const Generate = () => {
     const addCourse = useUserStore(state => state.addCourse);
     const course = useCourseStore(state => state.course);
 
-    const handleTopicGeneration = async () => {
-        if (!topicName) {
-            toast("Please enter a topic name!",
-            {
+    const handleTopicGeneration = async (e) => {
+        e.preventDefault();
+        if (!topicName.length < 3) {
+            toast("Please enter a valid topic name!", {
                 icon: '⚠️'
             });
             return;
@@ -78,16 +78,16 @@ const Generate = () => {
                         <div>
                             <div className="mt-16 md:mt-32"></div>
 
-                            <div className="gap-2 flex flex-wrap w-full lg:gap-0">
+                            <form className="gap-2 flex flex-wrap w-full lg:gap-0" onSubmit={handleTopicGeneration}>
                                 <div className="w-full lg:w-3/4">
                                         <Input size="lg" label="Enter a topic" className='lg:h-20 md:text-xl lg:rounded-r-none' color="blue" onChange={(e) => setTopicName(e.target.value)} value={topicName} />
                                 </div>
                                 <div className="w-full lg:w-1/4">
-                                    <Button fullWidth className='lg:h-20 lg:rounded-l-none lg:text-sm lg:p-0 flex justify-center items-center' onClick={handleTopicGeneration}>
+                                    <Button fullWidth className='lg:h-20 lg:rounded-l-none lg:text-sm lg:p-0 flex justify-center items-center' type='submit'>
                                         Generate
                                     </Button>
                                 </div>
-                            </div>
+                            </form>
 
                             <div className="mt-10"></div>
 
