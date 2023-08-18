@@ -53,6 +53,24 @@ const Chapter = () => {
         }
     }
 
+    const findNextChapterId = () => {
+        if (!courseId) return;
+        let nextChapterId = "";
+        let chapterIndex = course?.chapters.findIndex(c => c._id === chapterId);
+        if (chapterIndex === course?.chapters.length - 1) return null;
+        nextChapterId = course?.chapters[chapterIndex + 1]._id;
+        return nextChapterId;
+    }
+
+    const findPrevChapterId = () => {
+        if (!courseId) return;
+        let prevChapterId = "";
+        let chapterIndex = course?.chapters.findIndex(c => c._id === chapterId);
+        if (chapterIndex === 0) return 0;
+        prevChapterId = course?.chapters[chapterIndex - 1]._id;
+        return prevChapterId;
+    }
+
     const generateQuiz = async () => {
         if (chapter.quizId) return navigate(`/app/quiz/${chapter.quizId}`);
         let courseId = course._id;
@@ -113,8 +131,13 @@ const Chapter = () => {
                 <div className='pt-4 pb-8'>
                     <ReactMarkdown className="line-break">{chapter?.content}</ReactMarkdown>
                 </div>
-                <div className='py-4 flex justify-end'>
-                    <Button variant={chapter.completed? "filled" : "outlined"} onClick={() => handleChaterCompletion(chapter._id)} className='box-border text-md py-2 self-stretch'>{chapter.completed? "Completed" : "Mark as complete"}</Button>
+                <div className='w-full py-4 flex gap-2 justify-between'>
+                    {findPrevChapterId() ? <Button color='gray' onClick={() => navigate(`/app/course/${course._id}/chapter/${findPrevChapterId()}`)}>Previous chapter</Button> : "_"}
+                    <div>
+                        <Button variant={chapter?.completed ? "filled" : "outlined"} onClick={() => handleChaterCompletion(chapter._id)} className='box-border'>{chapter?.completed ? "Completed" : "Mark as complete"}</Button>
+                        {findNextChapterId() ? <Button color='gray' className="ml-2"onClick={() => navigate(`/app/course/${course._id}/chapter/${findNextChapterId()}`)}>Next chapter</Button> : null}
+                    </div>
+
                 </div>
             </div>
         </Card>
