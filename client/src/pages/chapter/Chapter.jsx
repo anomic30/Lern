@@ -26,16 +26,12 @@ const Chapter = () => {
 
 
     useEffect(() => {
-        // if (!course || !chapter) navigate('/app/courses');
-        console.log("Course: ", course);
-        console.log("Chapter: ", chapter);
         fetchCourseDetails();
     }, []);
 
     const fetchCourseDetails = async () => {
         if (!courseId) return;
         if (courseId && (course?._id === courseId)) {
-            console.log("Already fetched course details");
             return
         }
         try {
@@ -44,9 +40,7 @@ const Chapter = () => {
                     Authorization: "Bearer " + Cookies.get('token')
                 }
             });
-            // setCourseResp(courseResp.data.course);
             setCourse(courseResp.data.course);
-            console.log(courseResp.data.course);
         } catch (err) {
             toast.error("Something went wrong!");
             console.log(err);
@@ -88,7 +82,6 @@ const Chapter = () => {
             setQuiz(quizResp.data.newQuiz);
             setChapterQuizId(chapterId, quizResp.data.newQuiz._id);
             setLoading(false);
-            console.log(quizResp.data.newQuiz);
             navigate(`/app/quiz/${quizResp.data.newQuiz._id}`);
         } catch (error) {
             setLoading(false);
@@ -119,11 +112,6 @@ const Chapter = () => {
                     <h1 className='text-xl md:text-3xl lg:text-5xl text-black'>{chapter?.title}</h1>
                     <Button onClick={generateQuiz} disabled={loading}>{loading ? <Spinner /> : "Quiz"}</Button>
                 </div>
-                {/* <div className='flex pt-2'>
-                    <p className='cursor-pointer' onClick={() => navigate("/app/courses")}>Courses</p>
-                    <p className='mx-2'>/</p>
-                    <p className='cursor-pointer' onClick={() => navigate(-1)}>{course?.title}</p>
-                </div> */}
                 <Breadcrumbs className='px-0 bg-color-white my-2'>
                     <p className='cursor-pointer opacity-60' onClick={() => navigate(-1)}>{course?.title}</p>
                     <p className='cursor-pointer font-bold' >{chapter?.title}</p>
@@ -137,7 +125,6 @@ const Chapter = () => {
                         <Button variant={chapter?.completed ? "filled" : "outlined"} onClick={() => handleChaterCompletion(chapter._id)} className='box-border'>{chapter?.completed ? "Completed" : "Mark as complete"}</Button>
                         {findNextChapterId() ? <Button color='gray' className="ml-2"onClick={() => navigate(`/app/course/${course._id}/chapter/${findNextChapterId()}`)}>Next chapter</Button> : null}
                     </div>
-
                 </div>
             </div>
         </Card>

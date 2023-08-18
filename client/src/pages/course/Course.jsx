@@ -33,7 +33,6 @@ const Course = () => {
             });
             // setCourseResp(courseResp.data.course);
             setCourse(courseResp.data.course);
-            console.log(courseResp.data.course);
         } catch (err) {
             toast.error("Something went wrong!");
             console.log(err);
@@ -48,11 +47,6 @@ const Course = () => {
     return (
         <Card className="w-full p-2" id="resp-con">
         <Toaster/>
-            {/* <div className="relative w-full lg:w-1/2 md:w-2/3 px-4 sm:px-8">
-                <h1 className="text-xl md:text-3xl lg:text-5xl">Hello {user?.userName},</h1>
-                <p className="text-md md:text-1xl lg:text-2xl mt-2">View your course details here!</p>
-            </div>
-            <Chapters course={course}/>             */}
             <div className="flex flex-wrap h-screen">
                 <div className="relative w-full lg:w-1/2 md:w-2/3 px-4 sm:px-8">
                     <h1 className="text-2xl md:text-3xl lg:text-5xl">{course?.title}</h1>

@@ -1,8 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Button, Card, Input, Chip, List, ListItem, ListItemSuffix, IconButton, Container } from '@material-tailwind/react';
+import { Card, } from '@material-tailwind/react';
 import useAuthStore from '../../store/useAuthStore';
 import useUserStore from '../../store/useUserStore';
-import { useNavigate } from 'react-router-dom';
 import './Insights.scss';
 import Axios from 'axios';
 import Cookies from 'js-cookie';
@@ -28,7 +27,6 @@ const APP_SERVER = import.meta.env.VITE_APP_SERVER;
 
 
 const Insights = () => {
-    const navigate = useNavigate();
     const auth = useAuthStore(state => state.auth);
     const user = useUserStore(state => state.user);
     const canvasRef = useRef(null);
@@ -47,12 +45,6 @@ const Insights = () => {
         calcCourses();
     }, [user]);
 
-    const timeFormat = {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true
-    };
-
     const fetchAnalytics = async () => {
         try {
             setLoading(true);
@@ -61,9 +53,7 @@ const Insights = () => {
                     Authorization: "Bearer " + Cookies.get('token')
                 }
             });
-            setLoading(false);
-            console.log(analyticsResp.data);
-            
+            setLoading(false);            
             const sortDates=(analyticsResp.data.quizScoreOverTheTime.map(item => new Date(item.x)));
             sortDates.sort((a,b)=>a-b);
             setQuizTime(sortDates.map(date => {
@@ -73,7 +63,6 @@ const Insights = () => {
             }));
             setQuizScore(analyticsResp.data.quizScoreOverTheTime.map(item => item.y));
             setQuizTopic(analyticsResp.data.quizScoreOverTheTime.map(item => item.z));
-            console.log(user.courses);
         } catch (err) {
             setLoading(false);
             toast.error("Something went wrong!");

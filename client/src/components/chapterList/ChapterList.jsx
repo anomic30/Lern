@@ -18,7 +18,6 @@ const ChapterList = ({ course }) => {
     const setUser = useUserStore((state) => state.setUser);
 
     useEffect(() => {
-        console.log("User", user);
         if (course) {
             let completedChapters = 0;
             course.chapters.forEach(chapter => {
