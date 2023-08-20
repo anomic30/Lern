@@ -4,10 +4,10 @@ import useAuthStore from '../../store/useAuthStore';
 import useUserStore from '../../store/useUserStore';
 import Axios from 'axios';
 import Cookies from 'js-cookie';
-import ReactMarkdown from 'react-markdown'
 import { Button, Card, Input, Chip, List, ListItem, ListItemSuffix, IconButton, } from '@material-tailwind/react';
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { suggestions } from './suggestions';
+import { facts } from './randomFacts';
 import ChapterList from '../../components/chapterList/ChapterList';
 import useCourseStore from '../../store/useCourseStore';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
@@ -28,16 +28,20 @@ const Generate = () => {
     const setCourse = useCourseStore(state => state.setCourse);
     const addCourse = useUserStore(state => state.addCourse);
     const course = useCourseStore(state => state.course);
+    const [factIndex, setFactIndex] = useState(0);
 
     const handleTopicGeneration = async (e) => {
         e.preventDefault();
-        if (!topicName.length < 3) {
+        if (topicName.length < 3) {
             toast("Please enter a valid topic name!", {
                 icon: '⚠️'
             });
             return;
         }
         console.log("Generating topic...");
+        const factsInterval = setInterval(() => {
+            setFactIndex((prevIndex) => (prevIndex + 1) % facts.length);
+        }, 6000);
         try {
             setIsGenerating(true);
             const genResp = await Axios.post(APP_SERVER + "/api/user/generateCourse", { topic: topicName }, {
@@ -49,6 +53,7 @@ const Generate = () => {
             addCourse(genResp.data.courseMetadata);
             setShowCourse(true);
             setIsGenerating(false);
+            clearInterval(factsInterval);
             navigate("/app/course/"+genResp.data.newCourse._id);
             console.log(genResp.data.newCourse);
         } catch (error) {
@@ -72,6 +77,7 @@ const Generate = () => {
                     }
                     {isGenerating ? <div className="flex-1 flex flex-col justify-center items-center mt-10 md:mt-0">
                         <Player autoplay loop src={hourglass} style={{ height: '100%', width: '100%' }} />
+                        <p className='text-lg text-center'>{facts[factIndex]}</p>
                     </div> : showCourse ?
                         <ChapterList course={course} />
                         :

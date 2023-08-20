@@ -114,7 +114,7 @@ const Chapter = () => {
                 </div>
                 <Breadcrumbs className='px-0 bg-color-white my-2'>
                     <p className='cursor-pointer opacity-60' onClick={() => navigate(`/app/course/${course._id}`)}>{course?.title}</p>
-                    <p className='cursor-pointer font-bold' >{chapter?.title}</p>
+                    <p className='cursor-pointer font-bold text-cblue' >{chapter?.title}</p>
                 </Breadcrumbs>
                 <div className='pt-4 pb-8'>
                     <ReactMarkdown className="line-break">{chapter?.content}</ReactMarkdown>
