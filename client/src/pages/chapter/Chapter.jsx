@@ -120,10 +120,10 @@ const Chapter = () => {
                     <ReactMarkdown className="line-break">{chapter?.content}</ReactMarkdown>
                 </div>
                 <div className='w-full py-4 flex gap-2 justify-between'>
-                    {findPrevChapterId() ? <Button color='gray' onClick={() => navigate(`/app/course/${course._id}/chapter/${findPrevChapterId()}`)}>Previous chapter</Button> : "_"}
+                    {findPrevChapterId() ? <Button color='gray' onClick={() => navigate(`/app/course/${course._id}/chapter/${findPrevChapterId()}`)}>Previous</Button> : "_"}
                     <div>
                         <Button variant={chapter?.completed ? "filled" : "outlined"} onClick={() => handleChaterCompletion(chapter._id)} className='box-border'>{chapter?.completed ? "Completed" : "Mark as complete"}</Button>
-                        {findNextChapterId() ? <Button color='gray' className="ml-2"onClick={() => navigate(`/app/course/${course._id}/chapter/${findNextChapterId()}`)}>Next chapter</Button> : null}
+                        {findNextChapterId() ? <Button color='gray' className="ml-2"onClick={() => navigate(`/app/course/${course._id}/chapter/${findNextChapterId()}`)}>Next</Button> : null}
                     </div>
                 </div>
             </div>

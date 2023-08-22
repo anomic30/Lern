@@ -77,7 +77,7 @@ const Generate = () => {
                     }
                     {isGenerating ? <div className="flex-1 flex flex-col justify-center items-center mt-10 md:mt-0">
                         <Player autoplay loop src={hourglass} style={{ height: '100%', width: '100%' }} />
-                        <p className='text-lg text-center'>{facts[factIndex]}</p>
+                        <p className='text-lg text-center font-semibold'>{facts[factIndex]}</p>
                     </div> : showCourse ?
                         <ChapterList course={course} />
                         :
