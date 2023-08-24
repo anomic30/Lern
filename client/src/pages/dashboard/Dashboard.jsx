@@ -35,7 +35,7 @@ const Dashboard = () => {
 
             <h1 className="text-2xl md:text-3xl 2xl:text-5xl">Explore New Topics</h1>
             <p className='text-lg md:text-xl pt-4'>Generate new topic of your choice using our AI powered topic generator.</p>
-            <Button className='hidden lg:block mt-8 font-medium text-sm' onClick={() => navigate("/app/generate")}>Generate</Button>
+            <Button className='hidden lg:block mt-8  font-medium text-sm' onClick={() => navigate("/app/generate")}>Generate</Button>
           </Card>
           <div className=' flex flex-col w-full h-full basis-3/5'>
             <Card className=" bg-dshcard hover:bg-dteal transition duration-500 mb-4 p-6 h-60 md:h-2/4 quiz flex flex-row justify-between items-center">

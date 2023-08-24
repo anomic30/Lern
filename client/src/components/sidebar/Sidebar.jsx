@@ -12,18 +12,27 @@ import {
     List,
     ListItem,
     ListItemPrefix,
+    Dialog,
+    DialogHeader,
+    DialogBody,
+    DialogFooter,
+    Button,
 } from "@material-tailwind/react";
 import {
     ArrowLeftOnRectangleIcon,
     Bars3BottomLeftIcon,
     XMarkIcon,
+    PencilSquareIcon,
 } from "@heroicons/react/24/solid";
 import useAuthStore from '../../store/useAuthStore';
+import Modal from "../modal/Modal"
+import toast, { Toaster } from 'react-hot-toast';
 
 const Sidebar = () => {
     const logout = useAuthStore(state => state.logout);
     const navigate = useNavigate();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
     const isMobile = useMediaQuery({ query: '(max-width: 896px)' });
 
     useEffect(() => {
@@ -37,10 +46,20 @@ const Sidebar = () => {
             navigate("/", { replace: true });
         });
     }
+    const handleOpen = (res) => {
+        setDialogOpen(!dialogOpen);
+        console.log("handler called");
+        if (res=="success") {
+            toast.success("We have received your feedback!");
+            
+            return;
+        }
+    }
 
     return (
         <>
-            {isMobile && isSidebarOpen? <div className="fixed inset-0 bg-black opacity-25 z-40"></div>: null}
+            <Toaster />
+            {isMobile && isSidebarOpen ? <div className="fixed inset-0 bg-black opacity-25 z-40"></div> : null}
             {isMobile && (
                 <button className="fixed top-4 left-0 z-30 p-2"
                     onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -72,6 +91,12 @@ const Sidebar = () => {
                     })}
                 </List>
                 <List className='absolute bottom-4 left-2'>
+                    <ListItem className='top-auto' onClick={()=>handleOpen()} variant="gradient">
+                        <ListItemPrefix>
+                            <PencilSquareIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Feedback
+                    </ListItem>
                     <ListItem className='top-auto' onClick={handleLogout}>
                         <ListItemPrefix>
                             <ArrowLeftOnRectangleIcon className="h-5 w-5" />
@@ -79,6 +104,9 @@ const Sidebar = () => {
                         Logout
                     </ListItem>
                 </List>
+                <Dialog open={dialogOpen} handler={handleOpen} size={"xs"}>
+                    <Modal handler={handleOpen} />
+                </Dialog>
             </Card>
         </>
     )
