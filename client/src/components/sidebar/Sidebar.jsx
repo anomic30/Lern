@@ -26,6 +26,7 @@ import {
 } from "@heroicons/react/24/solid";
 import useAuthStore from '../../store/useAuthStore';
 import Modal from "../modal/Modal"
+import toast, { Toaster } from 'react-hot-toast';
 
 const Sidebar = () => {
     const logout = useAuthStore(state => state.logout);
@@ -45,11 +46,19 @@ const Sidebar = () => {
             navigate("/", { replace: true });
         });
     }
-
-    const handleOpen = () => setDialogOpen(!dialogOpen);
+    const handleOpen = (res) => {
+        setDialogOpen(!dialogOpen);
+        console.log("handler called");
+        if (res=="success") {
+            toast.success("We have received your feedback!");
+            
+            return;
+        }
+    }
 
     return (
         <>
+            <Toaster />
             {isMobile && isSidebarOpen ? <div className="fixed inset-0 bg-black opacity-25 z-40"></div> : null}
             {isMobile && (
                 <button className="fixed top-4 left-0 z-30 p-2"
@@ -82,7 +91,7 @@ const Sidebar = () => {
                     })}
                 </List>
                 <List className='absolute bottom-4 left-2'>
-                    <ListItem className='top-auto' onClick={handleOpen} variant="gradient">
+                    <ListItem className='top-auto' onClick={()=>handleOpen()} variant="gradient">
                         <ListItemPrefix>
                             <PencilSquareIcon className="h-5 w-5" />
                         </ListItemPrefix>
@@ -95,8 +104,8 @@ const Sidebar = () => {
                         Logout
                     </ListItem>
                 </List>
-                <Dialog open={dialogOpen} handler={handleOpen}>
-                    <Modal />
+                <Dialog open={dialogOpen} handler={handleOpen} size={"xs"}>
+                    <Modal handler={handleOpen} />
                 </Dialog>
             </Card>
         </>
