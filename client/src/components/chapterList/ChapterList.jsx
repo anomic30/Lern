@@ -70,7 +70,7 @@ const ChapterList = ({ course }) => {
                     <Typography color="blue" variant="h6">Completed</Typography>
                     <Typography color="blue" variant="h6">{completionPercentage}%</Typography>
                 </div>
-                <Progress value={completionPercentage} />
+                <Progress color="blue"  value={completionPercentage} />
             </div>
             <div className="mt-6"></div>
             <List>
@@ -83,9 +83,10 @@ const ChapterList = ({ course }) => {
                                     onChange={() => handleChaterCompletion(chapter._id)}
                                     defaultChecked={chapter?.completed}
                                     ripple={false}
-                                    className="hover:before:opacity-0"
+                                    color="blue"
+                                    className="hover:before:opacity-0 "
                                     containerProps={{
-                                        className: "p-0"
+                                        className: "p-0 "
                                     }} />
                             </ListItemPrefix>
                             <div className="w-full" onClick={() => navigate("chapter/" + chapter._id)}>

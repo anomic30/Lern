@@ -89,7 +89,7 @@ const Generate = () => {
                                         <Input size="lg" label="Enter a topic" className='lg:h-20 md:text-xl lg:rounded-r-none' color="blue" onChange={(e) => setTopicName(e.target.value)} value={topicName} />
                                 </div>
                                 <div className="w-full lg:w-1/4">
-                                    <Button fullWidth className='lg:h-20  lg:rounded-l-none lg:text-sm lg:p-0 flex justify-center items-center' type='submit'>
+                                    <Button fullWidth className='lg:h-20 bg-cblue  lg:rounded-l-none font-medium text-md lg:p-0 flex justify-center items-center' type='submit'>
                                         Generate
                                     </Button>
                                 </div>
@@ -104,7 +104,7 @@ const Generate = () => {
                             <div className='flex flex-wrap gap-2'>
                                 {suggestions.map((suggestion, index) => {
                                     return <div onClick={() => setTopicName(suggestion.name)} key={index}>
-                                        <Chip value={suggestion.name} className='cursor-pointer'/>
+                                        <Chip value={suggestion.name} className='cursor-pointer bg-cblue font-medium h-10 hover:bg-hblue ransition duration-500'/>
                                     </div>
                                 })}
                             </div>

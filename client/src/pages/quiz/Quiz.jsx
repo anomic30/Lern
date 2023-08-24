@@ -164,7 +164,7 @@ const Quiz = () => {
                     {!quizStarted ? (
                         <div className='h-3/6 w-full bg-dteal self-center rounded-2xl flex flex-col content-center justify-center flex-wrap gap-2 md:gap-5'>
                             <h1 className='text-xl md:text-3xl text-center'> Topic: {quiz?.title}</h1>
-                            <Button className='mx-auto bg-cteal' onClick={() => setQuizStarted(true)}>Start</Button>
+                            <Button className='mx-auto bg-cteal font-medium' onClick={() => setQuizStarted(true)}>Start</Button>
                         </div>
                     ) : (
                         <div className="container mx-auto px-4 py-8">

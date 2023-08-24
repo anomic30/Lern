@@ -31,6 +31,7 @@ module.exports = withMT({
         'dshcard':'#F9F9F9',
         'qteal':'#61EEC4',
         'tsd':'#A9CDC4',
+        'hblue':'#0075E0',
         ...colors,
       },
     },

@@ -47,7 +47,7 @@ const Course = () => {
     return (
         <Card className="w-full p-2" id="resp-con">
         <Toaster/>
-            <div className="flex flex-wrap h-screen">
+            <div className="flex flex-wrap h-screen ">
                 <div className="relative w-full lg:w-1/2 md:w-2/3 px-4 sm:px-8">
                     <h1 className="text-2xl md:text-3xl lg:text-5xl">{course?.title}</h1>
                     <ChapterList course={course} />

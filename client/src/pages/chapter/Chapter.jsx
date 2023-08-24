@@ -110,7 +110,7 @@ const Chapter = () => {
             <div className='w-full max-w-screen-xl h-full'>
                 <div className='flex justify-between'>
                     <h1 className='text-xl md:text-3xl lg:text-5xl text-black'>{chapter?.title}</h1>
-                    <Button onClick={generateQuiz} disabled={loading}>{loading ? <Spinner /> : "Quiz"}</Button>
+                    <Button onClick={generateQuiz} className='font-medium bg-cteal' disabled={loading}>{loading ? <Spinner /> : "Quiz"}</Button>
                 </div>
                 <Breadcrumbs className='px-0 bg-color-white my-2'>
                     <p className='cursor-pointer opacity-60' onClick={() => navigate(`/app/course/${course._id}`)}>{course?.title}</p>
@@ -120,10 +120,10 @@ const Chapter = () => {
                     <ReactMarkdown className="line-break">{chapter?.content}</ReactMarkdown>
                 </div>
                 <div className='w-full py-4 flex gap-2 justify-between'>
-                    {findPrevChapterId() ? <Button color='gray' onClick={() => navigate(`/app/course/${course._id}/chapter/${findPrevChapterId()}`)}>Previous chapter</Button> : "_"}
+                    {findPrevChapterId() ? <Button color='blue' variant='outlined' onClick={() => navigate(`/app/course/${course._id}/chapter/${findPrevChapterId()}`)}>Previous chapter</Button> : "_"}
                     <div>
-                        <Button variant={chapter?.completed ? "filled" : "outlined"} onClick={() => handleChaterCompletion(chapter._id)} className='box-border'>{chapter?.completed ? "Completed" : "Mark as complete"}</Button>
-                        {findNextChapterId() ? <Button color='gray' className="ml-2"onClick={() => navigate(`/app/course/${course._id}/chapter/${findNextChapterId()}`)}>Next chapter</Button> : null}
+                        <Button variant={chapter?.completed ? "filled" : "outlined"} onClick={() => handleChaterCompletion(chapter._id)} className='box-border font-medium'>{chapter?.completed ? "Completed" : "Mark as complete"}</Button>
+                        {findNextChapterId() ? <Button  className="ml-2 bg-cblue font-medium"onClick={() => navigate(`/app/course/${course._id}/chapter/${findNextChapterId()}`)}>Next chapter</Button> : null}
                     </div>
                 </div>
             </div>
