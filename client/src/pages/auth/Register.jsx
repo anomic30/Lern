@@ -59,10 +59,7 @@ const Register = () => {
         try {
             const checkResp = await Axios.post(APP_SERVER + '/api/auth/check', { email });
             if (checkResp.data.status) {
-                toast("User already exists",
-            {
-                icon: '⚠️'
-            });
+                toast("User already exists",{icon: '⚠️'});
                 setLoading(false);
                 return;
             }

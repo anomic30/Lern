@@ -78,12 +78,8 @@ const Login = () => {
             try {
                 //checking if user exists
                 const checkResp = await Axios.post(APP_SERVER + "/api/auth/check", { email: email });
-                if (!checkResp.data.status) {
-                    toast("Please register first!",
-                        {
-                            icon: '⚠️'
-                        });
-
+                if (!await checkResp.data.status) {
+                    toast("Please register first!", {icon: '⚠️'});
                     setLoading(false);
                     return navigate("/register");
                 }
@@ -99,11 +95,10 @@ const Login = () => {
                     });
                     setUser(loginResp.data.user);
                     setAuth(loginResp.data.metadata);
-                    // Cookies.set('token', didToken);
-                    setLoading(false);
-                    navigate("/app");
                     const newToken = await magic.user.getIdToken({ lifespan: 7 * 24 * 60 * 60 });
                     Cookies.set('token', newToken);
+                    setLoading(false);
+                    navigate("/app");
                 } catch (err) {
                     toast.error("Login attempt failed. Please try again later!");
                     setLoading(false);
