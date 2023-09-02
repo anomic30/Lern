@@ -110,7 +110,7 @@ const Chapter = () => {
             <div className='w-full max-w-screen-xl h-full'>
                 <div className='flex justify-between'>
                     <h1 className='text-xl md:text-3xl lg:text-5xl text-black'>{chapter?.title}</h1>
-                    <Button onClick={generateQuiz} disabled={loading}>{loading ? <Spinner /> : "Quiz"}</Button>
+                    <Button className="bg-cteal" onClick={generateQuiz} disabled={loading}>{loading ? <Spinner /> : "Quiz"}</Button>
                 </div>
                 <Breadcrumbs className='px-0 bg-color-white my-2'>
                     <p className='cursor-pointer opacity-60' onClick={() => navigate(`/app/course/${course._id}`)}>{course?.title}</p>
