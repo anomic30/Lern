@@ -7,6 +7,7 @@
     <img src="./client/src/assets/icons/logo-small.svg" alt="Project Logo" height="100">
   </a>
     <h1>Lern</h1>
+  <h3>🏆 Winner of the Atlas Madness Hackathon 2023 by Google and MongoDB</h3>
 </div>
 
 <!-- ABOUT THE PROJECT -->
