@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './Landing.scss'
 import useAuthStore from '../../store/useAuthStore'
-import useUserStore from '../../store/useUserStore'
 import { useNavigate } from 'react-router-dom'
-import { Player, Controls } from '@lottiefiles/react-lottie-player';
+import { Player } from '@lottiefiles/react-lottie-player';
 import {
   Navbar,
-  MobileNav,
-  Typography,
   Button,
-  IconButton,
 } from "@material-tailwind/react";
 import book from '../../assets/images/dancingbook.json'
 import f1 from '../../assets/images/F1.webp'
