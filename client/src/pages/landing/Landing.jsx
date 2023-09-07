@@ -18,7 +18,7 @@ import f3 from '../../assets/images/F3.webp'
 import appLogo from '../../assets/icons/logo.svg'
 import gcp from '../../assets/icons/gcp.svg'
 import mdb from '../../assets/icons/mongodb.svg'
-import bard from '../../assets/icons/bard.svg'
+import palm from '../../assets/icons/palm.svg'
 import discord from '../../assets/icons/discord.svg'
 import github from '../../assets/icons/github.svg'
 import isLogged from '../../services/logged'
@@ -154,11 +154,11 @@ const Landing = () => {
 
       <div className='bg-slate-50 w-full max-w-7xl p-8 mt-8 md:mt-20 rounded-xl'>
         <p className=" text-4xl md:text-5xl lg:text-7xl text-center md:pt-2 ">Powered By</p>
-        <section className='py-10 w-full max-w-7xl'>
-          <div className="flex lg:flex-row justify-between item-center flex-wrap flex-container">
-            <img data-aos="fade-up" data-aos-duration="700" src={bard} alt={bard} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
-            <img data-aos="fade-up" data-aos-duration="1000" src={mdb} alt={mdb} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
-            <img data-aos="fade-up" data-aos-duration="1300" src={gcp} alt={gcp} className="company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
+        <section className='py-5 md:py-10 w-full max-w-7xl'>
+          <div className="flex flex-col md:flex-row justify-between items-center flex-wrap grow">
+            <img data-aos="fade-up" data-aos-duration="700" src={palm} alt="PaLM 2" className="w-[50%] md:w-[25%] company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
+            <img data-aos="fade-up" data-aos-duration="1000" src={mdb} alt="MongoDB" className="w-[50%] md:w-[25%] company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
+            <img data-aos="fade-up" data-aos-duration="1300" src={gcp} alt="Google Cloud" className="w-[50%] md:w-[25%] company transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0" />
           </div>
         </section>
       </div>
