@@ -13,9 +13,6 @@ export const palmModel = (temperature) => {
         temperature: temperature,
         modelName: "models/text-bison-001", // OPTIONAL
         maxOutputTokens: 1024, // OPTIONAL
-        topK: 40, // OPTIONAL
-        topP: 3, // OPTIONAL
-        stopSequences: ["stop"], // OPTIONAL
     });
 
     return model;

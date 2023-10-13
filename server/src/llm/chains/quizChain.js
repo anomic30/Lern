@@ -1,6 +1,7 @@
 import { LLMChain } from "langchain/chains";
 import { palmModel } from "../models/palm.js";
 import { quizPrompt } from "../templates/quizTemplate.js";
+import { jsonParser, formatResponse } from "../utils/jsonParser.js";
 
 /**
  * Generate a quiz for a chapter using the Google PaLM model.
@@ -13,13 +14,14 @@ import { quizPrompt } from "../templates/quizTemplate.js";
 export const generateQuiz = async (chapter) => {
     const model = palmModel(0.8);
     const chain = new LLMChain({
-        model: model,
+        llm: model,
         prompt: quizPrompt,
+        verbose: true,
     });
 
     try {
         const result = await chain.call({ chapter: chapter });
-        return JSON.parse(result.text);
+        return jsonParser(result.text);
     } catch (error) {
         console.error("❌ Error inside quiz generation:", error);
         throw new Error("Quiz generation failed!");

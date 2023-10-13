@@ -13,8 +13,9 @@ import { contentPrompt } from "../templates/contentTemplate.js";
 export const generateContent = async(chapter) => {
     const model = palmModel(0.8);
     const chain = new LLMChain({
-        model: model,
+        llm: model,
         prompt: contentPrompt,
+        verbose: true,
     });
 
     try {
