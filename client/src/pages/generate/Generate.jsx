@@ -44,7 +44,7 @@ const Generate = () => {
         }, 6000);
         try {
             setIsGenerating(true);
-            const genResp = await Axios.post(APP_SERVER + "/api/user/generateCourse", { topic: topicName }, {
+            const genResp = await Axios.post(APP_SERVER + "/api/course/generate", { topic: topicName }, {
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
                 }

@@ -48,7 +48,7 @@ const Insights = () => {
     const fetchAnalytics = async () => {
         try {
             setLoading(true);
-            const analyticsResp = await Axios.get(APP_SERVER + `/api/user/analytics/`, {
+            const analyticsResp = await Axios.get(APP_SERVER + `/api/user/analytics`, {
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
                 }

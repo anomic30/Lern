@@ -26,7 +26,7 @@ const Quiz = () => {
     const fetchQuiz = async () => {
         if (quiz?._id === quizId) return;
         try {
-            const quizResp = await Axios.get(APP_SERVER + "/api/user/quiz/" + quizId, {
+            const quizResp = await Axios.get(APP_SERVER + "/api/quiz/" + quizId, {
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
                 }
@@ -40,7 +40,7 @@ const Quiz = () => {
 
     const updateScore = async (totalScore) => {
         try {
-            const updateScoreResp = await Axios.post(APP_SERVER + "/api/user/quiz/" + quizId, { totalScore }, {
+            const updateScoreResp = await Axios.post(APP_SERVER + "/api/quiz/" + quizId, { totalScore }, {
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
                 }
