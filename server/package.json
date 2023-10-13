@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +21,7 @@
     "express-rate-limit": "^6.7.0",
     "google-auth-library": "^8.9.0",
     "helmet": "^7.0.0",
-    "langchain": "^0.0.166",
+    "langchain": "^0.0.150",
     "mongoose": "^7.2.4",
     "morgan": "^1.10.0"
   },
