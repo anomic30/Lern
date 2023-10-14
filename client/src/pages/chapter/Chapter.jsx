@@ -35,7 +35,7 @@ const Chapter = () => {
             return
         }
         try {
-            const courseResp = await Axios.get(APP_SERVER + `/api/user/course/${courseId}`, {
+            const courseResp = await Axios.get(APP_SERVER + `/api/course/${courseId}`, {
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
                 }
@@ -73,7 +73,7 @@ const Chapter = () => {
 
         try {
             setLoading(true)
-            const quizResp = await Axios.post(APP_SERVER + "/api/user/generateQuiz", { courseId, chapterId, topic }, {
+            const quizResp = await Axios.post(APP_SERVER + "/api/quiz/generate", { courseId, chapterId, topic }, {
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
                 }
@@ -92,7 +92,7 @@ const Chapter = () => {
 
     const handleChaterCompletion = async (chapterId) => {
         try {
-            const completionResp = await Axios.post(APP_SERVER + `/api/user/chapter/complete`, { courseId: course._id, chapterId }, {
+            const completionResp = await Axios.post(APP_SERVER + `/api/course/chapter/complete`, { courseId: course._id, chapterId }, {
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
                 }

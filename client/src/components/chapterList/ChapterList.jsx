@@ -34,9 +34,9 @@ const ChapterList = ({ course }) => {
         }        
     },[course])
 
-    const handleChaterCompletion = async(chapterId) => {
+    const handleChapterCompletion = async(chapterId) => {
         try {
-            const completionResp = await Axios.post(APP_SERVER + `/api/user/chapter/complete`, {courseId:course._id, chapterId},{
+            const completionResp = await Axios.post(APP_SERVER + `/api/course/chapter/complete`, {courseId:course._id, chapterId},{
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
                 }
@@ -50,7 +50,7 @@ const ChapterList = ({ course }) => {
 
     const markCourseAsCompleted = async () => {
         try {
-            const resp = await Axios.post(APP_SERVER + `/api/user/course/complete/${course._id}`, {}, {
+            const resp = await Axios.post(APP_SERVER + `/api/course/complete/${course._id}`, {}, {
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
                 }
@@ -80,7 +80,7 @@ const ChapterList = ({ course }) => {
                             <ListItemPrefix className='z-100'>
                                 <Checkbox
                                     key={chapter._id+index}
-                                    onChange={() => handleChaterCompletion(chapter._id)}
+                                    onChange={() => handleChapterCompletion(chapter._id)}
                                     defaultChecked={chapter?.completed}
                                     ripple={false}
                                     className="hover:before:opacity-0"

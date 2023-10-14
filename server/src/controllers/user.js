@@ -5,7 +5,7 @@ export const getUserData = catchAsync(async (req, res) => {
   try {
     const magicId = req.magicId;
     const userData = await getUser(magicId);
-    return res.status(200).json(userData);
+    return res.status(200).json({ userData });
   } catch (error) {
     console.error("❌ Error inside getUserData controller:", error);
     return res.status(500).json({ message: error });

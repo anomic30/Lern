@@ -26,7 +26,7 @@ const Course = () => {
             return
         }
         try {
-            const courseResp = await Axios.get(APP_SERVER + `/api/user/course/${courseId}`, {
+            const courseResp = await Axios.get(APP_SERVER + `/api/course/${courseId}`, {
                 headers: {
                     Authorization: "Bearer " + Cookies.get('token')
                 }
