@@ -1,10 +1,10 @@
-runtime: nodejs16
+runtime: nodejs18
 instance_class: F1
 
 env_variables:
   MONGODB_URI: 
   MAGIC_SECRET_KEY: 
-  BARD_API_KEY: 
+  PALM_API_KEY: 
 
 automatic_scaling:
   min_instances: 1
