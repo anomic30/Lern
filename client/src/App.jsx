@@ -1,5 +1,5 @@
 import './App.scss'
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom'
 import AnimatedRoutes from './components/AnimatedRoutes'
 
 function App() {

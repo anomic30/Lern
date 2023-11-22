@@ -20,7 +20,7 @@ export const createUser = async (email, userName) => {
 
 export const validateEmail = async (email) => {
   try {
-    const user = User.findOne({ email: email });
+    const user = await User.findOne({ email: email });
     if (!user) {
       return false;
     }
