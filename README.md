@@ -1,3 +1,5 @@
+
+
 <div id="top"></div>
 
 <!-- PROJECT Intro -->
@@ -137,12 +139,14 @@ For the passwordless authentication, grab the API keys from [Magic](https://magi
 
 ### Starting the application
 
+Run the frontend and backend in separate terminal windows:
+
 ```bash
-# To run the frontend
+# Terminal 1: Navigate to Lern/client
 npm run dev
-# To run the backend
+# Terminal 2: Navigate to Lern/server
 npm run dev
-# To build the frontend
+# Build the frontend (from Lern/client)
 npm run build
 ```
 
